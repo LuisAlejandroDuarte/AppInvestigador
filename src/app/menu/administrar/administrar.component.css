@@ -1,0 +1,54 @@
+
+.text-label
+{
+    font-family: 'Monserrat';
+    display: table-cell;
+    
+}
+.card-body 
+{
+    font-family: 'Monserrat';
+    text-align: center;
+}
+
+.container
+{
+    margin-top: 5rem;
+    width: 80%;
+}
+
+img
+{   
+    text-align: center !important;
+    height: 5rem !important;
+    width: 5rem !important;
+}
+
+img:hover{
+    box-shadow: inset -1px 2px 30px -4px rgba(34, 54, 233, 0.75);
+    border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+}
+
+
+.btn-salvar i:hover {
+    color: red;
+}
+
+.btn-salir
+{
+    display: table-cell;
+    width: 77%;
+}
+
+.btn-salir i:hover {
+  
+    color: orange;
+}
+
+.btn-salir i {
+    font-size: 2.5rem;
+    color:red;
+    cursor: pointer;
+    
+}
+

@@ -1,0 +1,212 @@
+.form {
+  background-color: white;
+  margin: 0.5rem auto;
+  width: 98%;
+  box-shadow: 10px 10px 5px -13px rgba(0,0,0,0.75);
+}
+
+/************ CABECERA ************/
+
+#main-header {
+  display: table;
+  padding: 1em 0;
+}
+
+
+
+
+
+
+.logo-header,
+#main-menu {
+  display: table-cell;
+  vertical-align: top;
+}
+
+
+
+#main-menu {
+  width: 80%;
+  text-align: right;
+}
+
+  #main-menu .nav-button {
+    display: none;
+    border: 0.125rem solid #50c5ab;
+    color: #7e89a3;
+    border-radius: 5em;
+    padding: 0.5em 0;
+  }
+
+    #main-menu .nav-button.open {
+      background: #50c5ab;
+      color: white;
+    }
+
+  #main-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+    #main-menu ul li {
+      display: inline-block;
+    }
+
+      #main-menu ul li a {
+        padding: 0.5em 1.5em;
+        color: #070707;
+        display: block;
+        border-radius: 5em;
+      }
+
+        #main-menu ul li a.btn {
+          color: white;
+        }
+
+        #main-menu ul li a:hover {
+          background: #f6f6f8;
+        }
+
+        #main-menu ul li a.btn:hover {
+          color: #7e89a3;
+        }
+
+
+
+
+
+
+@media only screen and (max-width: 53rem) {
+
+  nav
+  {
+    margin-top:3rem;
+  }
+
+  #main-header {
+    display: block;
+    padding: 2em 0;
+  }
+
+  .logo-header,
+  #main-menu {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .logo-header {
+    margin-bottom: 1em;
+  }
+
+  /*#main-menu .nav-button {
+    display: block;
+  }
+
+  #main-menu .menu {
+    display: none;
+  }*/
+
+    #main-menu .menu li {
+      display: block;
+      margin-top: 0.3em;
+    }
+
+      #main-menu .menu li a {
+        background: #f6f6f8;
+        color: #7e89a3;
+        border: 0;
+      }
+
+        #main-menu .menu li a.btn {
+          color: #7e89a3;
+        }
+
+    #main-menu .menu.open {
+      display: block;
+    }
+}
+
+
+#contenido {
+  width:100%;
+  padding:1rem 1rem;
+}
+header {
+  border-bottom: 0.004rem solid #a2b3db;
+}
+
+
+
+
+header
+{
+ 
+  background-repeat: no-repeat;
+}
+
+ul{
+  font-family: 'Monserrat';
+}
+
+ul li {
+  display: inline-block;
+}
+
+ul a:hover
+{
+  background-color: rgba(4, 27, 231, 0.253);
+  border-radius: 0.7rem;
+  font-weight: bold;  
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 51.75rem) {
+  
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+.text
+{  
+    font-family: 'Monserrat';
+    font-size: 1.5rem;
+    font-weight:bold;
+    
+}
+
+.redes
+{ 
+  text-align: center;
+  
+}
+.redes a
+{
+  display: inline-block;
+  text-align: center;
+  font-size: 2rem;
+  color: rgba(7, 7, 253, 0.596);
+  cursor: pointer;
+ 
+}
+
+.redes a:hover{
+  color: blue;
+}

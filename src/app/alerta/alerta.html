@@ -1,0 +1,48 @@
+
+<div #modalAlerta class="modal" tabindex="-1" role="dialog" style="z-index: 10000;margin-top:2%">
+  <div class="modal-dialog"  role="document">
+    <div class="modal-content box-shadow">
+      <div>
+          <div  [ngClass]="(dataAlerta.tipo==0)? 'modal-header bg-info':
+          (dataAlerta.tipo==1)? 'modal-header bg-warning':
+          (dataAlerta.tipo==2)? 'modal-header bg-danger':
+          (dataAlerta.tipo==3)? 'modal-header bg-primary':''">
+          <div  class="modal-title releway text-titulo" style="color:black;font-size:24px;font-weight: bold;margin-top:-20px;margin-left: 0px">
+           <div style="margin-left: 3rem;line-height: 2.5rem;">{{dataAlerta.titulo}}</div>
+          </div>         
+        </div>
+        
+     </div>
+      
+      <div class="modal-body" style="border-bottom-style: solid;border-bottom-width: 2px;border-bottom-color:#605a9030">
+        <p class="releway text-parrafo" style="text-align: Left;
+        text-justify: inter-word;">{{dataAlerta.cuerpo}}</p>
+      </div>
+      <div class="modal-footer exoregular" style="margin-top:10px">
+        <button  type="button" 
+              [hidden]="!dataAlerta.botones[0].visible"                       
+              [ngClass]="(dataAlerta.tipo==0)? 'btn btn-info':
+              (dataAlerta.tipo==1)? 'btn  btn-sm btn-warning':
+              (dataAlerta.tipo==2)? 'btn  btn-sm btn-danger':
+              (dataAlerta.tipo==3)? 'btn  btn-sm btn-primary':'btn btn-default'"
+              (click)="onClicBoton1()">
+              <div class="releway text-parrafo" >
+                  {{dataAlerta.botones[0].label}}
+              </div> 
+        </button>&nbsp;&nbsp;
+        <button type="button" 
+              [hidden]="!dataAlerta.botones[1].visible"
+              [ngClass]="(dataAlerta.tipo==0)? 'btn btn-info':
+              (dataAlerta.tipo==1)? 'btn btn-sm btn-warning':
+              (dataAlerta.tipo==2)? 'btn  btn-sm btn-danger':
+              (dataAlerta.tipo==3)? 'btn  btn-sm btn-primary':'btn btn-default'"
+              (click)="onClicBoton2()">
+              <div class="releway text-parrafo" >
+                  {{dataAlerta.botones[1].label}}
+              </div> 
+      </button>
+      </div>
+    </div>
+  </div>
+
+</div>

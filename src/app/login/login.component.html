@@ -1,0 +1,30 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)" (boton2)="onClicBoton2($event)"></app-alerta>
+<div class="container">
+    <div class="card" style="margin-top:30%;">
+        <div class="card-header" style="text-align: center;">
+          {{headText}}
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" class="form-control form-control-sm" [(ngModel)]="user">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="form-group">
+                        <label>Clave</label>
+                        <input type="password" class="form-control form-control-sm" [(ngModel)]="pass">
+                    </div>
+                </div>
+            </div>                     
+            <div style="float: right;">
+                <button type="button" class="btn btn-primary btn-sm" (click)="onClickValidarUsuario()">Iniciar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-danger btn-sm" (click)="Salir()">Salir</button>
+            </div>            
+        </div>
+      </div>
+</div>

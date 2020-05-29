@@ -1,0 +1,65 @@
+
+<div class="container">  
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="btn-salir">
+        <i class="fas  fa-reply" (click)="goBack()" title="Regresar"></i>
+    </div>   
+    <div class="text-label">
+      <label>Administración</label>
+    </div>
+  </div>
+  </div>
+  
+    <div class="card">
+      <div class="card-body">
+          <div class="row  justify-content-md-center">
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="card" >
+                      <div class="card-body">
+                        <h5 class="card-title">Usuarios</h5> 
+                        <a [routerLink]="['/menu/administracion']">
+                          <img src="../../../assets/img/users.png">                                                               
+                        </a>                          
+                      </div>
+                    </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Avales grupos semilleros</h5>     
+                        <a [routerLink]="['/menu/investigador']">
+                          <img src="../../../assets/img/aval.png">                           
+                        </a>                          
+                      </div>
+                    </div>
+              </div>
+
+          </div>
+          <div class="row justify-content-md-center" style="margin-top:2rem" >
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Gestión base datos</h5>
+                        <a [routerLink]="['/menu/convocatoria']">
+                          <img src="../../../assets/img/basedatos.png">      
+                        </a>                                                  
+                      </div>
+                    </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                  <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">Reportes</h5>
+                        <a [routerLink]="['/menu/semillero']">
+                          <img src="../../../assets/img/reporte.png">      
+                        </a>                          
+                      </div>
+                    </div>
+              </div>                
+             
+          </div>   
+                        
+      </div>       
+    </div>    
+</div>

@@ -1,0 +1,6 @@
+{
+    "/AppInvestigador/src/app/service/": {
+      "target": "http://localhost/",
+      "secure": false
+    }
+}

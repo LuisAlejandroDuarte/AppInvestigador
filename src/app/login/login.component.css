@@ -1,0 +1,14 @@
+@media (min-width: 75rem) {
+    .container {
+      max-width: 27.5rem !important;
+    }
+  }
+  @media (min-width: 62.18rem) {
+    .container {
+      max-width: 27.5rem !important;
+    }
+  }
+
+  label {
+    font-family: 'Monserrat';
+  }

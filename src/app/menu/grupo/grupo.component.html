@@ -1,0 +1,34 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+
+<div  class="container" >      
+   
+    <div class="detalle" *ngIf="showData" style="width: 90%;margin-left: 10%;margin-top:5rem">       
+            <div class="detalle2" >
+               
+                <div class="material-datatables">
+                    <div class="salir">
+                        <div  style="display: inline-block;" (click)="onSalir()">
+                            <i class="fas fa-reply" title="Salir"></i>                               
+                        </div>
+                    </div>
+                    <div class="nuevo"> 
+                        <div class="icono">
+                                <i class="fas fa-plus-circle" (click)="showFormCreacion()" title="Crear grupo"  ></i>
+                        </div>
+                        <div class="texto">
+                                <small>GRUPOS</small>
+                        </div>   
+                       
+                        
+                    </div>                            
+                  
+                    <table id="dataGrupo" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                                style="width:100%">
+
+                         </table>
+                    </div>
+            </div>
+        </div>
+        <div class="card" *ngIf="!showData" style="width: 50%;margin-left: 25%;">
+        </div>
+</div>        

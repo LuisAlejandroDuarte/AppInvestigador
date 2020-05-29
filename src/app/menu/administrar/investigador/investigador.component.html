@@ -1,0 +1,310 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+
+<div class="container">
+
+  <div class="row" style="margin-top:3%">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          INVESTIGADOR        
+        </div>
+        <div class="card-body">     
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" (navChange)="onChangeNavs($event)">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>DATOS</a>
+              <ng-template ngbNavContent>
+                <div class="row">
+                  <div>
+                    <div class="photo"  (deferLoad)="imageDefer = true">
+                      <img style="height:100px;width:100px" [src]="src" id="p-hoto"/>
+                      <input accept="image/*"
+                      style="display: none"
+                      type="file" (change)="onFileChanged($event)"
+                      #fileInput>                          
+                    </div>                            
+                    <div class="button-photo">
+                    <button  type="button" class="btn btn-link btn-sm" (click)="fileInput.click()"><i class="fas fa-camera-retro"></i></button>
+                    <button  type="button" class="btn btn-link btn-sm" (click)="onClicEliminarFoto()"><i style="color:red" class="far fa-trash-alt"></i></button>
+                   </div>
+                  </div>
+                  
+                  <div class="col-sm">
+                      <div class="row">
+                          <div class="col-sm">                  
+                              <div class="form-group">
+                                  <label>Tipo Documento</label>
+                                  <select class="form-control form-control-sm" [(ngModel)]="investigador.INV_TIPO_DOCU_CODI">
+                                    <option [value]="-1">Seleccione ...</option>
+                                    <option *ngFor="let tipo of listTipoDocumento" [value]="tipo.TID_CODI">
+                                       {{tipo.TID_NOMB}}
+                                    </option>
+                                  </select>
+                                </div>       
+                          </div>                  
+                           <div class="col-sm">                  
+                              <div class="form-group">
+                                  <label>* Identificaci&oacute;n</label>  
+                                  <input class="form-control form-control-sm" [(ngModel)]="investigador.INV_IDEN" />
+                                </div>                               
+                          </div>                  
+                           <div class="col-sm">       
+                              <div class="form-group">
+                                  <label>* Nombres</label>                                 
+                                  <input class="form-control form-control-sm" [(ngModel)]="investigador.INV_NOMB" />
+                                </div>                 
+                            
+                          </div>                  
+                           <div class="col-sm">                  
+                              <div class="form-group">
+                                  <label>* Apellidos</label>                                 
+                                  <input class="form-control form-control-sm" [(ngModel)]="investigador.INV_APEL" />
+                                </div>                              
+                          </div>                  
+                       </div>
+                      
+                       <div class="row">    
+                          <div class="col-sm">                   
+                              <div class="form-group">
+                                  <label>* Fecha Nacimiento</label>                                 
+                                  <div class="input-group">
+                                    
+                                    <input class="form-control form-control-sm" 
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaNacimiento" ngbDatepicker #d="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="d.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                           </div>                     
+                          <div class="col-sm">                   
+                              <div class="form-group">
+                                  <label>* Teléfono</label>                                 
+                                  <input class="form-control form-control-sm" [(ngModel)]="investigador.INV_TELE_CELU" />
+                              </div>                        
+                           </div>                    
+                           <div class="col-sm">                   
+                              <div class="form-group">
+                                  <label>* Email</label>                                 
+                                  <input class="form-control form-control-sm" [(ngModel)]="investigador.INV_MAIL" />
+                              </div>   
+                           </div>                               
+                       </div>  
+                     </div>  
+                </div>
+              <div class="row">
+                  <div class="col-sm">
+                     <div class="form-group">
+                        <label>* Centro</label>               
+                        <select class="form-control form-control-sm" [(ngModel)]="investigador.INV_CENT_CODI"  (change)="onChangeCentro($event)">
+                         <option>Seleccione ...</option>
+                         <option *ngFor="let centro of listCentro" [value]="centro.CEN_ZONA_CODI">
+                            {{centro.CEN_NOMB}}
+                         </option>
+                       </select>
+                     </div>                                                     
+                  </div>  
+                  <div class="col-sm">
+                      <div class="form-group">
+                         <label>* Zona</label><br/>
+                         <label>{{nombreZona}}</label>                                                               
+                      </div>                                                     
+                   </div>  
+                   <div class="col-sm">
+                      <div class="form-group">
+                         <label>* Programa</label>               
+                         <select class="form-control form-control-sm" [(ngModel)]="investigador.INV_PROG_ACAD_CODI" (change)="onChangePrograma($event)">
+                          <option>Seleccione ...</option>
+                          <option *ngFor="let programa of listPrograma" [value]="programa.PAC_CODI">
+                            {{programa.PAC_NOMB}}
+                         </option>
+                        </select>
+                      </div>                                                     
+                   </div>  
+                   <div class="col-sm">
+                      <div class="form-group">
+                         <label>* Escuela</label>               
+                         <select class="form-control form-control-sm" [(ngModel)]="investigador.INV_ESC_CODI">
+                          <option>Seleccione ...</option>
+                          <option *ngFor="let escuela of listEscuela" [ngValue]="escuela.ESC_CODI">
+                            {{escuela.ESC_NOMB}}
+                         </option>
+                        </select>
+                      </div>                                                     
+                   </div>                                                           
+                </div>    
+                <div class="row">
+                    <div class="col-sm">
+                       <div class="form-group">
+                          <label>* Link CVLAC</label>               
+                          <input class="form-control form-control-sm" id="exampleFormControlSelect1" [(ngModel)]="investigador.INV_LINK_CVLA"/>
+                       </div>                                                     
+                    </div>                              
+                     <div class="col-sm">
+                        <div class="form-group">
+                        <label>* Tipo Cargo</label>              
+                         <select class="form-control form-control-sm" [(ngModel)]="investigador.INV_TICA_CODI">
+                          <option  [value]=null>Seleccione ...</option>
+                          <option *ngFor="let tipoCargo of listTipoCargo" [value]="tipoCargo.TICA_CODI">
+                            {{tipoCargo.TICA_NOMB}}
+                         </option>
+                        </select>                                  
+                        </div>                                                     
+                     </div>                                                           
+                  </div>     
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>Información Académica</a>
+              <ng-template ngbNavContent>
+                <div class="row">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">                  
+                    <div class="form-group">
+                        <label>Nivel de Formación</label>
+                        <select class="form-control form-control-sm" [(ngModel)]="selNivelFormacion">
+                          <option [ngValue]=null>Seleccione ...</option>
+                          <option *ngFor="let nivel of listNivelFormacion" [ngValue]="nivel">
+                             {{nivel.NIV_NOMB}}
+                          </option>
+
+                        </select>
+                    </div>                          
+                  </div>                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">                  
+                    <div class="form-group">
+                        <label>Título Obtenido</label>       
+                        <input class="form-control form-control-sm"  [(ngModel)]="tituloObtenido"/>
+                    </div>                              
+                  </div>                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">                  
+                      <div class="form-group">
+                          <label>Institución</label>            
+                          <input class="form-control form-control-sm"  [(ngModel)]="institucion"/>
+                      </div>                              
+                                         
+                  </div>                  
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">   
+                    <div style="display: inline-block;">
+                      <div class="form-group">
+                        <label>Año de Grado</label>           
+                        <input class="form-control form-control-sm" (keydown)="valuechange($event)"  [(ngModel)]="grado" type="text" maxlength="4">                         
+                    </div>
+                    </div>
+                    <div style="display: inline-block;margin-left: 1rem;">
+                      <div class="icono">
+                        <i class="fas fa-plus-circle" (click)="onClicAgregarInformacionAcademica()" title="Agregar información académica"></i>
+                      </div>                                                                                                           
+                    </div>                                                              
+                                            
+                  </div>                  
+              </div>
+              <ul class="list-group list-group-flush" *ngFor="let item of listInformacionAcademica">
+                <li class="list-group-item">
+                  <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                      {{item.nombreNivel}}
+                      </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                      {{item.NIN_TITU_OBTE}}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                      {{item.NIN_INST}}
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                      <div style="display: inline-block;">
+                        {{item.NIN_AGNO}}
+                      </div>
+                      <div style="display: inline-block;margin-left: 1rem;">
+                        <div class="icono"  >
+                          <i class="far fa-trash-alt" style="color: red;font-size:1rem" (click)="onClicEliminarInformacionAcademica(item)" title="Eliminar información académica"></i>
+                        </div>                                                                                                           
+                      </div>   
+                    </div>
+                  </div>
+                </li>
+                
+              </ul>
+              
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+              <a ngbNavLink>Información Investigativa</a>
+              <ng-template ngbNavContent>
+                <div class="row">        
+                  <div class="col-md-12" style="margin-top: 20px">          
+                <table style="width:100%">          
+                  <thead>          
+                   <tr>          
+                      <th style="width:100px">Grupos</th>                              
+                      <th style="width:100px">Fecha Inicio</th>          
+                      <th style="width:100px">Fecha Termina</th>          
+                   </tr>          
+                  </thead>          
+                  <tr >          
+                    <td>          
+                       <span ></span>          
+                    </td>                   
+                     <td>          
+                       <span></span>          
+                    </td>          
+                     <td>          
+                       <span></span>          
+                    </td>          
+                  </tr>          
+                </table>                              
+                </div>          
+          </div>
+          <div class="row">        
+            <div class="col-md-12" style="margin-top: 20px">    
+          <table style="width:100%">    
+            <thead>    
+             <tr>    
+                <th style="width:100px">Semilleros</th>              
+                <th style="width:100px">Fecha Inicio</th>    
+                <th style="width:100px">Fecha Termina</th>    
+             </tr>    
+            </thead>    
+            <tr>                   
+              <td>    
+                 <span></span>    
+              </td>                
+               <td>    
+                 <span></span>    
+              </td>    
+               <td>    
+                 <span></span>    
+              </td>    
+            </tr>    
+          </table>        
+          </div>            
+        </div>
+    
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+              <a ngbNavLink>Productos de Investigación</a>
+              <ng-template ngbNavContent>
+               
+              </ng-template>
+            </li>
+          </ul>
+          
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                   
+        </div>
+        <div class="card-footer text-muted text-right">
+          <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+          <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+        </div>
+      </div> 
+
+    </div>
+
+  </div>
+</div>
+
+
+
+

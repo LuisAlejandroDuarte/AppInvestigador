@@ -1,0 +1,23 @@
+.card-body 
+{
+    font-family: 'Monserrat';
+    text-align: center;
+}
+
+.container
+{
+    margin-top: 5rem;
+}
+
+img
+{   
+    text-align: center;
+    height: 5rem;
+    width: 5rem;
+}
+
+img:hover{
+    box-shadow: inset -1px 2px 30px -4px rgba(34, 54, 233, 0.75);
+    border-radius: 0.25rem 0.25rem 0.25rem 0.25rem;
+}
+

@@ -1,0 +1,41 @@
+
+<div class="form">
+  <header id="main-header" class="container-fluid">
+
+    <div class="logo-header">
+
+    </div><!-- /.logo-header -->
+
+    <nav id="main-menu">
+
+      <span class="nav-button">Ver menú</span>
+
+      <ul class="menu"> 
+        
+        <li><a>Administración<i class="fas fa-search" style="margin-left: 0.8rem;color:green"></i></a></li>
+        <li><a [routerLink]="['/perfil']">Investigador<i class="far fa-id-card" style="margin-left: 0.8rem;color:lightseagreen"></i></a></li>       
+        <li><a [routerLink]="['/quienessomos']">Grupos<i class="fas fa-child" style="margin-left: 0.8rem;"></i></a></li>
+        <li><a [routerLink]="['/tiendavirtual']">Convocatorias<i class="fas fa-shopping-cart" style="margin-left: 0.8rem;color:blue"></i></a></li>
+        <li><a [routerLink]="['/iniciarsesion']">Semilleros<i class="far fa-user" style="margin-left: 0.8rem;"></i></a></li>       
+        <div *ngIf="showAdmin">
+          <li><a [routerLink]="['/']">Usuarios<i class="fas fa-search" style="margin-left: 0.8rem;color:green"></i></a></li>
+          <li><a [routerLink]="['/perfil']">Avales grupos semilleros<i class="far fa-id-card" style="margin-left: 0.8rem;color:lightseagreen"></i></a></li>       
+          <li><a [routerLink]="['/quienessomos']">Base datos<i class="fas fa-child" style="margin-left: 0.8rem;"></i></a></li>
+          <li><a [routerLink]="['/tiendavirtual']">reportes<i class="fas fa-shopping-cart" style="margin-left: 0.8rem;color:blue"></i></a></li>          
+        </div>
+
+
+      </ul>
+    </nav><!-- /#main-menu -->
+    <div class="redes">
+     
+      <a href="https://www.youtube.com/channel/UCsRye5znZuXLKN3eis064MQ" target="_blank" title="YouTube" style="margin-right: 1rem;"> <i style="color:red" class="fab fa-youtube"></i></a>
+      <a href="https://www.facebook.com/Criptoempresarios-100669534966603/" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="https://twitter.com/Criptoempresar1?s=09" target="_blank" title="Twitter" style="margin-left: 1rem;margin-right: 1rem;"><i class="fab fa-twitter-square"></i></a>
+      <a href="http://www.instagram.com/criptoempresarioscolombia" target="_blank"  title="Instagram" style="margin-right: 1rem;"><i class="fab fa-instagram"></i></a>
+      <a  href="https://t.me/joinchat/ElEdNhupJIGnb5KpNL8FUg" target="_blank" title="Telegram"> <i class="fab fa-telegram"></i></a>
+      
+    </div>
+  </header>
+</div>
+

@@ -1,0 +1,40 @@
+
+
+  label {
+    font-family: 'Monserrat';
+    font-size: 0.8rem;
+  }
+  .form-control-sm
+  {
+      height: calc(1.1rem + 0.5rem + 2px);
+      font-size: 0.7rem;
+  }
+
+  .photo
+  {
+    display: block; 
+  }
+
+  .button-photo
+  {
+    display:block;
+  }
+
+
+.icono i
+{
+    font-size: 2rem;
+    color:blue;
+    cursor: pointer;
+    
+}
+.icono i:hover
+{
+
+    background-color: rgb(235, 167, 42);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 
+    0 4px 2px -3px rgba(0, 0, 0, 0.2), 
+    0 2px 6px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0.3rem;
+    
+}

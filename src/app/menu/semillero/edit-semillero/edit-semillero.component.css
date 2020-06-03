@@ -1,0 +1,117 @@
+
+.detalle2 {
+    height: auto;
+    background-color: white;   
+    border-radius: 0.5rem;
+    box-shadow:0px 14px 20px -10px rgba(0,0,0,0.75);
+   
+}
+
+a{
+    font-family: "Monserrat";
+}
+
+
+
+.card
+{
+    font-family: "Monserrat";
+    margin:0.5rem;
+}
+
+label {
+    font-family: "Monserrat";
+    font-size: 0.8rem;
+}
+
+.form-control-sm
+  {
+      height: calc(1.1rem + 0.5rem + 2px);
+      font-size: 0.7rem;
+  }
+
+  .card-header
+  {
+      padding: 0rem;
+      font-weight: bold;
+  }
+
+  .form-group
+  {
+      margin-bottom: 0.2rem;
+  }
+
+    .nuevo
+    {
+        text-align: right;
+    }
+  .nuevo-icono .icono
+  {
+      display: table-cell;
+      width: 30%;
+  
+  }
+  
+  .nuevo .icono i
+  {
+      font-size: 2rem;
+      color:blue;
+      cursor: pointer;
+      
+  }
+  .nuevo .icono i:hover
+  {
+  
+      background-color: rgb(235, 167, 42);
+      box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 
+      0 4px 2px -3px rgba(0, 0, 0, 0.2), 
+      0 2px 6px 0 rgba(0, 0, 0, 0.12);
+      border-radius: 0.3rem;
+      
+  }
+
+  
+.btn-buttons
+{
+    display: table;
+}
+
+
+.btn-salir {
+padding-right: 1rem;
+}
+
+.btn-salvar, .btn-salir {
+    display: table-cell;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 0rem;
+}
+
+
+.btn-salvar i {
+    font-size: 2rem;
+    color:blue;
+    cursor: pointer;
+}
+
+.btn-salvar i:hover {
+    color: red;
+}
+
+.btn-salir i:hover {
+    color: orange;
+}
+
+.btn-salir i {
+    font-size: 2rem;
+    color:red;
+    cursor: pointer;
+    
+}
+
+
+
+
+
+

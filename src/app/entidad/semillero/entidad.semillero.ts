@@ -2,6 +2,8 @@ export class Semillero
 {
     SEM_CODI :number;
     SEM_NOMB:string;
+    SEM_FECH_INI:Date;
+    SEM_FECH_TERM:Date;
     SEM_MISI:string;
     SEM_VISI:string;
     SEM_OBJG:string;

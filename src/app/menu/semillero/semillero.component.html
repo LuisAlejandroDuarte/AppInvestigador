@@ -1,1 +1,34 @@
-<p>semillero works!</p>
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+
+<div  class="container" >      
+   
+    <div class="detalle" *ngIf="showData" style="width: 90%;margin-left: 10%;margin-top:5rem">       
+            <div class="detalle2" >
+               
+                <div class="material-datatables">
+                  
+                    <div class="nuevo"> 
+                        <div class="icono">
+                                <i class="fas fa-plus-circle" (click)="showFormCreacion()" title="Crear grupo"  ></i>
+                        </div>
+                        <div class="texto">
+                                <small>SEMILLEROS</small>
+                        </div>   
+                       
+                        
+                    </div>                            
+                  
+                    <table id="dataSemillero" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                                style="width:100%">
+
+                         </table>
+                         <div class="card-footer text-muted text-right">               
+                            <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                          </div>
+
+                    </div>
+            </div>
+         
+        </div>
+       
+</div>        

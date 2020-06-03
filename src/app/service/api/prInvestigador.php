@@ -88,6 +88,11 @@
 
     if ($Accion=="Foto")
     {
+
+      if (file_exists($_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/Fotos/')) {
+      
+      
+
       $upload_dir = $_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/Fotos/';
       $server_url =  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] .'/AppInvestigador/Fotos/';
       $SQL="SELECT   inv_foto FROM sgi_inve
@@ -109,7 +114,10 @@
             echo '';
 
             
-           return;           
+           return;   
+      }     
+      else
+      return null;   
     }
 
     if ($Accion=="CENTRO")

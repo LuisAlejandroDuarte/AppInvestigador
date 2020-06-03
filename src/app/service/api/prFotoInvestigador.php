@@ -4,6 +4,9 @@ header("Access-Control-Allow-Methods: PUT, GET, POST");
  require_once("database.php");  
  $Id = json_decode($_POST['Id']);
  $response = array();
+ if (!file_exists($_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/Fotos/')) {
+    mkdir($_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/Fotos/', 0777, true);
+}
  $upload_dir = $_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/Fotos/';
  $server_url =  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 

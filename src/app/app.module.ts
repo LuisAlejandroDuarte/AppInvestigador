@@ -29,7 +29,7 @@ registerLocaleData(localeEsCO, 'es-CO',localeDeExtra);
     BrowserModule,
     CommonModule,
     HttpClientModule,
-    RouterModule.forRoot(AppRoutes),
+    RouterModule.forRoot(AppRoutes,{useHash:true}),
     FormsModule,    
     SharedAlerta,
     NavMenuModule

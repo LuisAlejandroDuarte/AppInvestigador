@@ -322,7 +322,15 @@ export class InvestigadorComponent {
                   
 
                   $('#iconoEspera').hide();
-                });
+                },error=> {
+                  $('#iconoEspera').hide();
+                  console.clear();
+                  var errorComponent = new ErrorComponent();            
+                  this.mensaje =errorComponent.GenerarMensaje(error);          
+                  this.mensaje.nVentana="IdError";
+                  this.alerta.onChangedMyId("IdError");                      
+                  $('#IdError').show();  
+                  });
 
                 
               },error=> {

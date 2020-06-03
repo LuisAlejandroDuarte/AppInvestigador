@@ -4,6 +4,11 @@ header("Access-Control-Allow-Methods: PUT, GET, POST");
 require_once("../database.php");  
  $Id = json_decode($_POST['pgr_plnt_codi']);
  $response = array();
+
+ if (!file_exists($_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/PlanTrabajo/')) {
+    mkdir($_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/PlanTrabajo/', 0777, true);
+}
+
  $upload_dir = $_SERVER['DOCUMENT_ROOT'] .'/AppInvestigador/PlanTrabajo/';
  $server_url =  $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
 

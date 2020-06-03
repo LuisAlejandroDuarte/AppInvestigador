@@ -6,11 +6,7 @@
             <div class="detalle2" >
                
                 <div class="material-datatables">
-                    <div class="salir">
-                        <div  style="display: inline-block;" (click)="onSalir()">
-                            <i class="fas fa-reply" title="Salir"></i>                               
-                        </div>
-                    </div>
+                  
                     <div class="nuevo"> 
                         <div class="icono">
                                 <i class="fas fa-plus-circle" (click)="showFormCreacion()" title="Crear grupo"  ></i>
@@ -26,9 +22,13 @@
                                 style="width:100%">
 
                          </table>
+                         <div class="card-footer text-muted text-right">               
+                            <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                          </div>
+
                     </div>
             </div>
+         
         </div>
-        <div class="card" *ngIf="!showData" style="width: 50%;margin-left: 25%;">
-        </div>
+       
 </div>        

@@ -1,4 +1,4 @@
-export interface GrupoLinea
+export class  GrupoLinea
 {
     gli_codi:number;
     gli_grup_codi:number;

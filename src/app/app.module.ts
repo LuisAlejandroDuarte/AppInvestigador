@@ -23,7 +23,6 @@ import localeDeExtra from "@angular/common/locales/extra/es-CO";
 
 
 
-
 registerLocaleData(localeEsCO, 'es-CO',localeDeExtra);
 @NgModule({
   imports: [

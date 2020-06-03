@@ -537,11 +537,14 @@ export class InvestigadorComponent {
               this.selNivelFormacion=null;
 
               this.serviceNivelformacionInvestigador.get(this.investigador.INV_CODI).subscribe(res=>{
+                if (res!=null)
+                {
                 res.forEach(element => {
                     element.nombreNivel=this.listNivelFormacion.find(x=>x.NIV_CODI==element.NIN_NIV_CODI).NIV_NOMB;
                     element.seleccionado=false;
                   });
                   this.listInformacionAcademica=res;
+                }
                   $('#iconoEspera').hide();
               },error=> {
                 $('#iconoEspera').hide();

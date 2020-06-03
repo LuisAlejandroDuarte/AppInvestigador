@@ -33,9 +33,16 @@ export class GrupoLineaService {
       return this.http.get<GrupoLinea>(this.baseUrl + 'grupolinea/prSelect.php/?id=' + id + "&accion=select");
     }  
 
+    delete (grupoLinea:GrupoLinea):Observable<GrupoLinea>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<GrupoLinea>(this.baseUrl + 'grupolinea/prDelete.php',JSON.stringify(grupoLinea), {headers});
+    }  
+
     update (grupoLinea:GrupoLinea):Observable<boolean>{
       const headers = new HttpHeaders().set('content-type', 'application/json');  
       return this.http.post<boolean>(this.baseUrl + 'grupolinea/prUpdate.php',JSON.stringify(grupoLinea), {headers});
     }  
+
+
 
 }

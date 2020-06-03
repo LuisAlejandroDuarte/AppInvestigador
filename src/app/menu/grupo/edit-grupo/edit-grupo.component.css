@@ -11,6 +11,8 @@ a{
     font-family: "Monserrat";
 }
 
+
+
 .card
 {
     font-family: "Monserrat";
@@ -41,7 +43,7 @@ label {
 
     .nuevo
     {
-        text-align: center;
+        text-align: right;
     }
   .nuevo-icono .icono
   {
@@ -107,5 +109,9 @@ padding-right: 1rem;
     cursor: pointer;
     
 }
+
+
+
+
 
 

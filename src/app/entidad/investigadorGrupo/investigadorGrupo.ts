@@ -9,6 +9,8 @@ export class InvestigadorGrupo
     IGR_FECH_TERM:Date;
     IGR_TIPO_VINC_CODI :number;
 
+    nombreInvestigador:string;
+    nombreTipoVinculacion:string;
     ACCION:string;
 }
 

@@ -112,10 +112,13 @@ export class GrupoComponent implements OnInit {
     grupo.accion="ALL";
     $('#iconoEspera').show();
     this.serviceGrupo.getALL(grupo).subscribe(res=>{
-      this.table = $('#dataGrupo').DataTable();
-      this.table.clear();
-      this.table.rows.add(res);
-      this.table.draw();
+      if (res!=null)
+      {
+        this.table = $('#dataGrupo').DataTable();
+        this.table.clear();
+        this.table.rows.add(res);
+        this.table.draw();
+      }
       $('#iconoEspera').hide();
     });
 

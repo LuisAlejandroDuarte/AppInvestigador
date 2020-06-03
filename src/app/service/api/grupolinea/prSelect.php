@@ -5,7 +5,7 @@
 
     if ($_GET["accion"]=='all')
     {
-      $SQL ="SELECT GLI.gli_fech_inic,GLI.gli_fech_term,GLI.gli_line_inve_codi,LI.lin_desc AS nombreLinea 
+      $SQL ="SELECT GLI.gli_codi, GLI.gli_fech_inic,GLI.gli_fech_term,GLI.gli_line_inve_codi,LI.lin_desc AS nombreLinea 
       FROM sgi_grup_line_inve AS GLI INNER JOIN sgi_line_inve AS LI ON
       LI.lin_codi=gli.gli_line_inve_codi 
       WHERE GLI.gli_grup_codi=" . $_GET["idGrupo"];
@@ -16,7 +16,7 @@
 
     if ($_GET["accion"]=='select')
     {
-        $SQL ="SELECT GLI.gli_fech_inic,GLI.gli_fech_term,GLI.gli_line_inve_codi,LI.lin_desc AS nombreLinea 
+        $SQL ="SELECT GLI.gli_codi, GLI.gli_fech_inic,GLI.gli_fech_term,GLI.gli_line_inve_codi,LI.lin_desc AS nombreLinea 
         FROM sgi_grup_line_inve AS GLI INNER JOIN sgi_line_inve AS LI ON
         LI.lin_codi=gli.gli_line_inve_codi 
         WHERE GLI.gli_codi=" . $_GET["id"];

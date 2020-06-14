@@ -6,7 +6,7 @@ import { MenuRoutes } from './menu.routing';
 import { MenuComponent } from './menu/menu.component';
 import { SharedAlerta } from '../alerta/alerta.module';
 import { AuthGuard } from '../guards/auth.guard';
-import { ConvocatoriaComponent } from './convocatoria/convocatoria.component';
+import { MenuConvocatoriaComponent } from './menuconvocatoria/menuconvocatoria.component';
 import { SemilleroComponent } from './semillero/semillero.component';
 import { GrupoComponent } from './grupo/grupo.component';
 
@@ -23,7 +23,7 @@ import { GrupoComponent } from './grupo/grupo.component';
   ],
   declarations: [
     MenuComponent,
-    ConvocatoriaComponent,
+    MenuConvocatoriaComponent,
     SemilleroComponent,
     GrupoComponent    
   ],

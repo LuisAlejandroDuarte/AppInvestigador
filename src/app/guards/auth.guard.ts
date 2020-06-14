@@ -46,6 +46,12 @@ export class AuthGuard implements CanActivate {
         return false;
       }
 
+      if (state.url=="/convocatoria/gestion" && user.use_cod_tipo==1){
+        localStorage.removeItem("user");
+        this.router.navigate(['/login',5]);        
+        return false;
+      }
+
       return true;
       
     }
@@ -63,6 +69,10 @@ export class AuthGuard implements CanActivate {
       }  
       if (state.url=="/semillero/0"){
         this.router.navigate(['/login',4]);        
+      }  
+
+      if (state.url=="/convocatoria/gestion"){
+        this.router.navigate(['/login',5]);        
       }  
       return false;
     }

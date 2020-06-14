@@ -61,6 +61,15 @@ export class CustomDateParserFormatter extends NgbDateParserFormatter {
     
     return date ? moment([date.year, date.month-1, date.day]).format("DD MMMM YYYY"): '';
   }
+
+  formatUTC(date: NgbDateStruct | null): Date {
+    moment.locale('es');    
+    
+     let fecha:Date=moment(new Date(date.year,date.month,date.day).toLocaleString().replace("Z","")).toDate();
+    
+
+    return fecha ? fecha: null;
+  }
 }
 
 
@@ -186,8 +195,7 @@ export class EditGrupoComponent implements OnInit {
     private servicePlanTrabajo:PlanTrabajoGrupoService ) { }
 
    
-  ngOnInit(): void {
-    this.user=JSON.parse(localStorage.getItem("user"));
+  ngOnInit(): void {    
     this.grupo.gru_codi=this.route.snapshot.params.id;    
     this.grupo.gru_inv_codi=this.user.inv_codi;
     moment.locale('es'); 
@@ -659,6 +667,14 @@ export class EditGrupoComponent implements OnInit {
                   });                             
               }
             });
+          },error=> {
+            $('#iconoEspera').hide();
+            console.clear();
+            var errorComponent = new ErrorComponent();            
+            this.mensaje =errorComponent.GenerarMensaje(error);          
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();
           });
         
          
@@ -780,7 +796,8 @@ export class EditGrupoComponent implements OnInit {
         if (this.Validar())
         {       
           this.grupo.gru_nomb=this.nombre;
-          this.grupo.gru_fech_ini=moment(moment(this.dateAdapter.format(this.fechaCreacion),"DD MMMM YYYY").toDate()).toDate();
+          
+          this.grupo.gru_fech_ini=moment(this.dateAdapter.format(this.fechaCreacion),"DD MMMM YYYY").toDate();
           this.grupo.gru_codi_colc=this.GRU_COLC_CODI;
           this.grupo.gru_cate_colc=this.GRU_CATE_COLC;
           this.grupo.gru_area_codi=this.selArea.ARE_CODI;
@@ -1673,10 +1690,8 @@ iniciarTablaSemillero() {
     if (this.columnIndex==3)
     {                   
       this.showDataSemillero=false;
-      $('#iconoEspera').show();
-      let semillero = new Semillero();
-      semillero.accion="ALL";
-      this.serviceSemillero.getALL(semillero).subscribe(res=>{
+      $('#iconoEspera').show();      
+      this.serviceSemillero.getALL().subscribe(res=>{
         this.listSemillero=res;
         this.selSemillero=null;                
         this.fechaInicioSemillero=null;
@@ -1757,7 +1772,7 @@ showFormCreacionSemilleros()
   $('#iconoEspera').show();
   let semillero = new Semillero();
   semillero.accion="ALL";
-  this.serviceSemillero.getALL(semillero).subscribe(res=>{
+  this.serviceSemillero.getALL().subscribe(res=>{
     if (res!=null)
     {
       this.listSemillero=res;

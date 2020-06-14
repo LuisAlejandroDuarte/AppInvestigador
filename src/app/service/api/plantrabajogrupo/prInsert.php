@@ -6,13 +6,13 @@
   if (isset($data["pgr_fech_term"])==null)
     {
       $SQL ="INSERT INTO sgi_plnt_grup (pgr_grup_codi,pgr_nombre,pgr_fech_inic) 
-      VALUES (" . $data["pgr_grup_codi"] . ",'" . $data["pgr_nombre"] . "','" . $data["pgr_fech_inic"] . "')";
+      VALUES (" . $data["pgr_grup_codi"] . ",'" . $data["pgr_nombre"] . "','" .  str_replace('Z','',$data["pgr_fech_inic"]) . "')";
     }
     else
     {      
       $SQL ="INSERT INTO sgi_plnt_grup (pgr_grup_codi,pgr_nombre,pgr_fech_inic,pgr_fech_term) 
-      VALUES (" . $data["pgr_grup_codi"] . ",'" . $data["pgr_nombre"] . "','" . $data["pgr_fech_inic"] . "',
-      '" . $data["pgr_fech_term"] . "')";
+      VALUES (" . $data["pgr_grup_codi"] . ",'" . $data["pgr_nombre"] . "','" .  str_replace('Z','',$data["pgr_fech_inic"]) . "',
+      '" .  str_replace('Z','',$data["pgr_fech_term"]) . "')";
     }
 
       $execute = new  DataBase();

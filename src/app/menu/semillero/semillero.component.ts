@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaComponent } from 'src/app/alerta/alerta';
-import { Mensaje } from 'src/app/entidad/mensaje/entidad.mensaje';
+import { Mensaje, TipoMensaje } from 'src/app/entidad/mensaje/entidad.mensaje';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { lenguajeSpanish } from 'src/app/complement/languajeDatatable';
 import { logueado } from 'src/app/entidad/usuario/entidad.usuario';
 import { Semillero } from 'src/app/entidad/semillero/entidad.semillero';
 import { SemilleroService } from 'src/app/service/semillero/serviceSemillero';
+import { ErrorComponent } from 'src/app/error/error';
 declare const $: any;
 
 @Component({
@@ -21,6 +22,7 @@ export class SemilleroComponent implements OnInit {
   showData:boolean=true;
   table:any;
   columnIndex:number;
+  semillero:Semillero= new Semillero();
   constructor(private router:Router,private serviceSemillero:SemilleroService) { }
 
   ngAfterViewInit(): void {
@@ -89,17 +91,40 @@ export class SemilleroComponent implements OnInit {
 
       if (this.columnIndex==2)
       {
-       let id:number=event.currentTarget.cells[2].children[0].dataset.elementId;
+        let id:number=event.currentTarget.cells[2].children[0].dataset.elementId;
        
-        this.router.navigate(['/grupo/0/edit-grupo/' + id ]);  
-
+        this.router.navigate(['/semillero/0/edit-semillero/' + id ]);  
          
            
       
       }  
       if (this.columnIndex==3)
       {
-           
+        let id:number=event.currentTarget.cells[2].children[0].dataset.elementId;
+        $('#iconoEspera').show();
+        this.semillero.SEM_CODI=id;
+        this.semillero.accion="SELECT";
+        this.serviceSemillero.get(id).subscribe(res=>{
+          $('#iconoEspera').hide();
+          this.semillero.SEM_NOMB=res.SEM_NOMB;
+          let mensaje = new Mensaje();
+          mensaje.tipo=TipoMensaje.CondicionSINO;       
+          this.mensaje = new Mensaje(mensaje);     
+          this.mensaje.titulo="Eliminar semilleros"
+          this.mensaje.cuerpo="Desea eliminar el semillero " + res.SEM_NOMB  + " ?";                                     
+          this.mensaje.nVentana="IdEliminar";
+          this.alerta.onChangedMyId("IdEliminar");                      
+          $('#IdEliminar').show();   
+          return false;   
+        },error=> {
+          $('#iconoEspera').hide();
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+        });
       }   
     });
   }
@@ -111,7 +136,7 @@ export class SemilleroComponent implements OnInit {
     let semillero= new Semillero();   
     semillero.accion="ALL";
     $('#iconoEspera').show();
-    this.serviceSemillero.getALL(semillero).subscribe(res=>{
+    this.serviceSemillero.getALL().subscribe(res=>{
       if (res!=null)
       {
         this.table = $('#dataSemillero').DataTable();
@@ -126,11 +151,58 @@ export class SemilleroComponent implements OnInit {
 
   onClicBoton1(event:any)
   {
-
+    if (event.nVentana=="IdError")
+    {
+      $('#IdError').hide();
+    }
+    if (event.nVentana=="IdEliminar")
+    {
+      $('#iconoEspera').show();      
+      this.serviceSemillero.delete(this.semillero).subscribe(res=>{
+        $('#iconoEspera').hide();   
+        if (res!=true)
+        {
+          let mensaje = new Mensaje();
+          mensaje.tipo=TipoMensaje.Advertencia;       
+          this.mensaje = new Mensaje(mensaje);     
+          this.mensaje.titulo="Eliminar semillero"
+          this.mensaje.cuerpo="No se puede eliminar el semillero " + this.semillero.SEM_NOMB  + " " + res;                                     
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show(); 
+          $('#IdEliminar').hide();   
+          return;
+        }
+        $('#iconoEspera').hide();
+        var indexes = this.table
+        .rows()
+        .indexes()
+        .filter((value:any,index:any) => {
+          return  this.semillero.SEM_CODI==this.table.row(value).data().SEM_CODI;
+        } );
+    
+        this.table.rows(indexes).remove().draw();
+      
+        $('#IdEliminar').hide();    
+      },error=> {
+          $('#iconoEspera').hide();
+          $('#IdEliminar').hide();    
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+       });   
+    }
   }
 
   onClicBoton2(event:any)
   {
+    if (event.nVentana=="IdEliminar")
+    {
+      $('#IdEliminar').hide();
+    }
 
   }
 

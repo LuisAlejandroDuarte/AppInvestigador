@@ -37,4 +37,9 @@ export class GrupoService {
       return this.http.post<boolean>(this.baseUrl + 'grupo/prUpdate.php',JSON.stringify(grupo), {headers});
     }  
 
+    delete (grupo:Grupo):Observable<boolean>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<boolean>(this.baseUrl + 'grupo/prDelete.php',JSON.stringify(grupo), {headers});
+    }  
+
 }

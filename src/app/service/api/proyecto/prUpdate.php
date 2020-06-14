@@ -21,7 +21,7 @@
     }
 
       $execute = new  DataBase();
-      $result= $execute->executeUpdateDeleteSql($SQL,true);        
+      $result= $execute->executeUpdateDeleteSql($SQL);        
       echo json_encode($result);      
     
     

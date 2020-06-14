@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertaComponent } from 'src/app/alerta/alerta';
-import { Mensaje } from 'src/app/entidad/mensaje/entidad.mensaje';
+import { Mensaje, TipoMensaje } from 'src/app/entidad/mensaje/entidad.mensaje';
 import { lenguajeSpanish } from 'src/app/complement/languajeDatatable';
 import { Router } from '@angular/router';
 import { GrupoService } from 'src/app/service/grupo/serviceGrupo';
 import { Grupo } from 'src/app/entidad/grupo/entidad.grupo';
 import { logueado } from 'src/app/entidad/usuario/entidad.usuario';
 import * as moment from 'moment';
+import { ErrorComponent } from 'src/app/error/error';
 declare const $: any;
 @Component({
   selector: 'app-grupo',
@@ -20,8 +21,9 @@ export class GrupoComponent implements OnInit {
   showData:boolean=true;
   table:any;
   columnIndex:number;
+  grupo:Grupo= new Grupo();
   constructor(private router:Router,private serviceGrupo:GrupoService) { }
-
+  
   ngAfterViewInit(): void {
     moment.locale('es'); 
     this.iniciarTabla();
@@ -98,7 +100,31 @@ export class GrupoComponent implements OnInit {
       }  
       if (this.columnIndex==3)
       {
-           
+        let id:number=event.currentTarget.cells[2].children[0].dataset.elementId;
+        $('#iconoEspera').show();
+        this.grupo.gru_codi=id;
+        this.grupo.accion="SELECT";
+        this.serviceGrupo.get(this.grupo).subscribe(res=>{
+          $('#iconoEspera').hide();
+          this.grupo.gru_nomb=res.gru_nomb;
+          let mensaje = new Mensaje();
+          mensaje.tipo=TipoMensaje.CondicionSINO;       
+          this.mensaje = new Mensaje(mensaje);     
+          this.mensaje.titulo="Eliminar grupos"
+          this.mensaje.cuerpo="Desea eliminar el grupo " + res.gru_nomb  + " ?";                                     
+          this.mensaje.nVentana="IdEliminar";
+          this.alerta.onChangedMyId("IdEliminar");                      
+          $('#IdEliminar').show();   
+          return false;   
+        },error=> {
+          $('#iconoEspera').hide();
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+        });
       }   
     });
   }
@@ -126,12 +152,60 @@ export class GrupoComponent implements OnInit {
 
   onClicBoton1(event:any)
   {
-
+    if (event.nVentana=="IdError")
+    {
+      $('#IdError').hide();
+    }
+    if (event.nVentana=="IdEliminar")
+    {
+      $('#iconoEspera').show();      
+      this.serviceGrupo.delete(this.grupo).subscribe(res=>{
+        $('#iconoEspera').hide();   
+        if (res!=true)
+        {
+          let mensaje = new Mensaje();
+          mensaje.tipo=TipoMensaje.Advertencia;       
+          this.mensaje = new Mensaje(mensaje);     
+          this.mensaje.titulo="Eliminar grupos"
+          this.mensaje.cuerpo="No se puede eliminar el grupo " + this.grupo.gru_nomb  + " " + res;                                     
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show(); 
+          $('#IdEliminar').hide();   
+          return;
+        }
+        $('#iconoEspera').hide();
+        var indexes = this.table
+        .rows()
+        .indexes()
+        .filter((value:any,index:any) => {
+          return  this.grupo.gru_codi==this.table.row(value).data().gru_codi;
+        } );
+    
+        this.table.rows(indexes).remove().draw();
+      
+        $('#IdEliminar').hide();    
+      },error=> {
+          $('#iconoEspera').hide();
+          $('#IdEliminar').hide();    
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+       });   
+    }
   }
 
   onClicBoton2(event:any)
   {
+    if (event.nVentana=="IdEliminar")
+    {
+      $('#IdEliminar').hide();
+    }
 
+    
   }
 
   showFormCreacion()

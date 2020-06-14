@@ -43,7 +43,7 @@ export const AppRoutes: Routes = [
       {
         path: '',
         loadChildren: () =>
-        import('./menu/convocatoria/convocatoria.module').then(m=>m.ConvocatoriaModule)
+        import('./menu/menuconvocatoria/convocatoria.module').then(m=>m.ConvocatoriaModule)
       }]
   },{
     path: 'semillero/:id',

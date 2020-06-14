@@ -1,10 +1,16 @@
-<?php
 
+<?php
 
 define('DB_SERVER','localhost');
 define('DB_NAME','grupogua_investigador');
 define('DB_USER','grupogua_jmedicru');
 define('DB_PASS','MbCj199803#');
+
+
+//  define('DB_SERVER','localhost');
+//  define('DB_NAME','id13950393_grupogua_investigador');
+//  define('DB_USER','id13950393_grupogua_jmedicru');
+//  define('DB_PASS','Lu1s@lejandr0');
 
  class DataBase {
 
@@ -18,7 +24,7 @@ define('DB_PASS','MbCj199803#');
     $this->connection = new mysqli(DB_SERVER ,DB_USER ,DB_PASS ,DB_NAME);
     $resultArray = array(); 
 
-    $resultado = mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
+    $resultado = mysqli_query($this->connection,$sql);
 
     if (mysqli_num_rows($resultado)==0 )                        
        $resultArray=null;                                                            
@@ -37,7 +43,7 @@ define('DB_PASS','MbCj199803#');
     $this->connection = new mysqli(DB_SERVER ,DB_USER ,DB_PASS ,DB_NAME);
     $resultArray = array(); 
 
-    $resultado = mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
+    $resultado = mysqli_query($this->connection,$sql);
 
     if (mysqli_num_rows($resultado)==0 )                        
        $resultArray=null;                                                            
@@ -57,7 +63,7 @@ define('DB_PASS','MbCj199803#');
     $this->connection = new mysqli(DB_SERVER ,DB_USER ,DB_PASS ,DB_NAME);
     $resultArray = array(); 
 
-    $resultado = mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
+    $resultado = mysqli_query($this->connection,$sql);
      
     
     if($id==true)   $resultado  = mysqli_insert_id($this->connection);
@@ -71,7 +77,7 @@ define('DB_PASS','MbCj199803#');
     $this->connection = new mysqli(DB_SERVER ,DB_USER ,DB_PASS ,DB_NAME);
     $resultArray = array(); 
 
-    $resultado = mysqli_query($this->connection,$sql) or die(mysqli_error($this->connection));
+    $resultado = mysqli_query($this->connection,$sql);
           
    
     $this->connection->close();

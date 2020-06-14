@@ -2,6 +2,8 @@ export class Semillero
 {
     SEM_CODI :number;
     SEM_NOMB:string;
+    SEM_INV_CODI:number;
+    SEM_AVAL:number;
     SEM_FECH_INI:Date;
     SEM_FECH_TERM:Date;
     SEM_MISI:string;
@@ -23,4 +25,30 @@ export class Semillero
     SEM_CENT_CODI:string;
 
     accion:string;
+
+    
+        constructor() {            
+            this.SEM_NOMB="";            
+            this.SEM_AVAL=0;
+            this.SEM_FECH_INI=null;
+            this.SEM_FECH_TERM=null;
+            this.SEM_MISI="";
+            this.SEM_VISI="";
+            this.SEM_OBJG="";
+            this.SEM_TEMA_INVE="";
+            this.SEM_PRPR_ESPE="";
+            this.SEM_OBJE="";
+            this.SEM_PROP_ACTU="";
+            this.SEM_PERT_CADE="";
+            this.SEM_ARTI_LINE="";
+            this.SEM_PROY_REGI="";
+            this.SEM_ESTR_FINA="";
+            this.SEM_ESTR_KNOW="";
+            this.SEM_ESTR_ELAB_PROD="";
+            this.SEM_ESTR_EXTE="";
+            this.SEM_ESTR_VINC_ESTU="";
+            this.SEM_ALIA_CONV="";
+            this.SEM_CENT_CODI="";
+        
+    }
 }

@@ -7,7 +7,7 @@
     {
       $SQL ="UPDATE sgi_plnt_grup set 
         pgr_nombre='" . $data["pgr_nombre"] . "',
-        pgr_fech_inic ='" . $data["pgr_fech_inic"] . "',
+        pgr_fech_inic ='" .  str_replace('Z','',$data["pgr_fech_inic"]) . "',
         pgr_fech_term=null    
         WHERE pgr_plnt_codi =" . $data["pgr_plnt_codi"] ;            
     }
@@ -16,13 +16,13 @@
 
       $SQL ="UPDATE sgi_plnt_grup set 
       pgr_nombre='" . $data["pgr_nombre"] . "',
-      pgr_fech_inic ='" . $data["pgr_fech_inic"] . "',
-      pgr_fech_term='" . $data["pgr_fech_term"] . "'    
+      pgr_fech_inic ='" .  str_replace('Z','',$data["pgr_fech_inic"]) . "',
+      pgr_fech_term='" .  str_replace('Z','',$data["pgr_fech_term"]) . "'    
       WHERE pgr_plnt_codi =" . $data["pgr_plnt_codi"] ;              
     }
 
       $execute = new  DataBase();
-      $result= $execute->executeUpdateDeleteSql($SQL,true);        
+      $result= $execute->executeUpdateDeleteSql($SQL);        
       echo json_encode($result);      
     
     

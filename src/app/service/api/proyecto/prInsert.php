@@ -6,13 +6,13 @@
   if (isset($data["gli_fech_term"])==null)
     {
       $SQL ="INSERT INTO sgi_grup_line_inve (gli_grup_codi,gli_fech_inic,gli_line_inve_codi) 
-      VALUES (" . $data["gli_grup_codi"] . ",'" . $data["gli_fech_inic"] . "',
+      VALUES (" . $data["gli_grup_codi"] . ",'" .  str_replace('Z','',$data["gli_fech_inic"]) . "',
       " . $data["gli_line_inve_codi"] . ")";
     }
     else
     {      
       $SQL ="INSERT INTO sgi_grup_line_inve (gli_grup_codi,gli_fech_inic,gli_fech_term,gli_line_inve_codi) 
-      VALUES (" . $data["gli_grup_codi"] . ",'" . $data["gli_fech_inic"] . "','" .  $data["gli_fech_term"] . "',
+      VALUES (" . $data["gli_grup_codi"] . ",'" .  str_replace('Z','',$data["gli_fech_inic"]) . "','" .   str_replace('Z','',$data["gli_fech_term"]) . "',
       " . $data["gli_line_inve_codi"] . ")";
     }
 

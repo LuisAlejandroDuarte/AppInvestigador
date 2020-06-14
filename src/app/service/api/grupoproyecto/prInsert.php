@@ -7,13 +7,13 @@
     {
       $SQL ="INSERT INTO sgi_grup_proy (id_proy,id_prod,id_grup,id_inve,fech_ini) 
       VALUES (" . $data["id_proy"] . "," . $data["id_prod"] . "," . $data["id_grup"] . "," . $data["id_inve"] . ",
-      '" . $data["fech_ini"] . "')";
+      '" .  str_replace('Z','',$data["fech_ini"]) . "')";
     }
     else
     {      
       $SQL ="INSERT INTO sgi_grup_proy (id_proy,id_prod,id_grup,id_inve,fech_ini,fech_term) 
       VALUES (" . $data["id_proy"] . "," . $data["id_prod"] . "," . $data["id_grup"] . "," . $data["id_inve"] . ",
-      '" . $data["fech_ini"] . "','" . $data["fech_term"] . "')";
+      '" .  str_replace('Z','',$data["fech_ini"]) . "','" .  str_replace('Z','',$data["fech_term"]) . "')";
     }
 
       $execute = new  DataBase();

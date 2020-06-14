@@ -1,0 +1,245 @@
+
+.icons-controls
+{
+    display: inline-block;
+
+}
+
+.icons-controls i
+{
+    padding-left: 1rem;
+    cursor: pointer;
+    
+}
+
+span {
+    display: block;
+    font-family: 'Muli';
+    font-size: 0.9rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+label {
+    font-family: 'Monserrat';
+    font-size: 1rem;
+    font-weight: bold;
+}
+.text-header
+{
+    text-align: right;
+    font-family: 'Monserrat';
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 0.5rem 0.5rem;
+}
+
+.text-title {
+    margin-bottom: 0.1rem;
+}
+
+.text-titulo
+{
+  
+    font-family: 'Monserrat';
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+.text-parrafo
+{
+  
+    font-family: 'Muli';
+    font-size: 0.8rem;
+    font-weight: 200;
+    margin-bottom: 0rem;
+}
+
+.isDisabled
+{
+    pointer-events: none;
+    opacity: 0.5;
+    background: white;
+}
+
+
+.example-full-width
+{
+    width: 100%;
+}
+
+.detalle2 {
+    height: auto;
+    background-color: white;
+   
+    border-radius: 0.5rem;
+    box-shadow:0px 14px 20px -10px rgba(0,0,0,0.75);
+   
+}
+.material-datatables
+{
+    padding:1.5rem;
+}
+
+.nuevo
+{
+    text-align: center;
+}
+
+.nuevo .icono 
+{
+    display: inline-block;
+        
+}
+
+.nuevo .texto
+{
+    display: inline-block;
+    padding-left: 3rem;
+    
+}
+
+.salir {
+    float: left;
+    margin-top:-1.8rem;
+    margin-right: -1.2rem;
+    color:red;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+
+.nuevo-icono .icono
+{
+    display: table-cell;
+    width: 30%;
+
+}
+
+.nuevo .icono i
+{
+    font-size: 2rem;
+    color:blue;
+    cursor: pointer;
+    
+}
+.nuevo .icono i:hover
+{
+
+    background-color: rgb(235, 167, 42);
+    box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 
+    0 4px 2px -3px rgba(0, 0, 0, 0.2), 
+    0 2px 6px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 0.3rem;
+    
+}
+
+
+.nuevo .texto small
+{
+    font-family: 'Robotolatin';
+    font-size:24px;
+    color:blue;
+}
+
+.row >.col >.header {
+    display: inline-block;
+    width: 100%;
+    height: 6rem;
+    border:0.2rem solid rgba(63, 19, 241, 0.125);
+    border-radius: 0.5rem;
+}
+
+.row >.col >.header>.header-icon {
+    display: inline-block;
+    background-color:  rgb(64, 61, 236);
+    width: 4rem;
+    height: 4rem;
+    margin: 1rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    text-align: center;
+}
+
+.row >.col >.header>.header-icon i {
+font-size: 3rem;
+color:rgb(235, 167, 42);
+margin-top: 0.6rem;
+}
+
+.row >.col >.header >.header-text {
+    display: inline-block;
+    width: 90%;
+}
+
+.btn-buttons
+{
+    display: table;
+}
+
+
+.btn-salir {
+padding-right: 1rem;
+}
+
+.btn-salvar, .btn-salir {
+    display: table-cell;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+
+.btn-salvar i {
+    font-size: 2.5rem;
+    color:blue;
+    cursor: pointer;
+}
+
+.btn-salvar i:hover {
+    color: red;
+}
+
+.btn-salir i:hover {
+    color: orange;
+}
+
+.btn-salir i {
+    font-size: 2.5rem;
+    color:red;
+    cursor: pointer;
+    
+}
+
+
+
+.btn-eliminar {
+    padding-left: 1rem;
+    }
+
+.btn-eliminar i:hover {
+    color: rgb(255, 6, 6);
+}
+
+.btn-eliminar i {
+    font-size: 2.5rem;
+    color:rgba(252, 2, 2, 0.555);
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 62rem){ 
+    .row >.col >.header >.header-text {        
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 32.9375rem){ 
+    .nuevo-icono .texto small
+    {
+       font-size: 1.5rem;
+    }
+    .row >.col >.header >.header-text {        
+        width: 70%;
+    }
+}

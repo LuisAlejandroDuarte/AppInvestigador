@@ -2,11 +2,11 @@
 <?php
   set_time_limit(0);
   require_once("../database.php");  
-  $data= json_decode(file_get_contents("php://input"),TRUE); 
+  
 
-  $Accion = $data['accion'];  
+  $Accion = $_GET['accion'];  
 
-    if ($Accion=='ALL')
+    if ($Accion=='all')
     {
       $SQL ="SELECT * from sgi_semi";
       $execute = new  DataBase();
@@ -14,11 +14,11 @@
         echo json_encode($result);      
     }
 
-    if ($Accion=='SELECT')
+    if ($Accion=='select')
     {
-      $SQL ="SELECT * from sgi_semi WHERE SEM_CODI =" . $data["SEM_CODI"] ;
+      $SQL ="SELECT * from sgi_semi WHERE SEM_CODI =" . $_GET["id"] ;
       $execute = new  DataBase();
-        $result= $execute->executeArraySql($SQL);        
+        $result= $execute->executeSql($SQL);        
         echo json_encode($result);      
     }
  ?>

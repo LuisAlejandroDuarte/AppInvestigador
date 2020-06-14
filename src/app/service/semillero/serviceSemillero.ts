@@ -17,9 +17,30 @@ export class SemilleroService {
         public http: HttpClient
     ){}
     
-    getALL (semillero:Semillero):Observable<Semillero[]>{
+    getALL ():Observable<Semillero[]>{
       const headers = new HttpHeaders().set('content-type', 'application/json');  
-      return this.http.post<Semillero[]>(this.baseUrl + 'semillero/prSelect.php',JSON.stringify(semillero), {headers});
+      return this.http.get<Semillero[]>(this.baseUrl + 'semillero/prSelect.php/?accion=all');
+    }  
+
+
+    insert (semillero:Semillero):Observable<any>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<any>(this.baseUrl + 'semillero/prInsert.php',JSON.stringify(semillero), {headers});
+    }  
+
+    get (id:number):Observable<Semillero>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.get<Semillero>(this.baseUrl + 'semillero/prSelect.php/?id=' + id + '&accion=select');
+    }  
+
+    delete (semillero:Semillero):Observable<any>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<any>(this.baseUrl + 'semillero/prDelete.php',JSON.stringify(semillero), {headers});
+    }  
+
+    update (semillero:Semillero):Observable<boolean>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<boolean>(this.baseUrl + 'semillero/prUpdate.php',JSON.stringify(semillero), {headers});
     }  
 
 }

@@ -56,7 +56,7 @@
       $SQL="UPDATE sgi_inve set  INV_TIPO_DOCU_CODI=" . $data['INV_TIPO_DOCU_CODI'] . ",
            INV_NOMB ='" . $data['INV_NOMB'] . "',
            INV_APEL ='" . $data['INV_APEL'] . "',
-           INV_FECH_NACI ='" . $data['INV_FECH_NACI'] . "',
+           INV_FECH_NACI ='" .  str_replace('Z','',$data['INV_FECH_NACI']) . "',
            INV_TELE_CELU ='" . $data['INV_TELE_CELU'] . "',
            INV_MAIL='" . $data['INV_MAIL'] . "',
            INV_CENT_CODI=" . $data['INV_CENT_CODI'] . ",

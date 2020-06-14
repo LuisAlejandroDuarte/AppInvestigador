@@ -26,16 +26,16 @@ import localeDeExtra from "@angular/common/locales/extra/es-CO";
 registerLocaleData(localeEsCO, 'es-CO',localeDeExtra);
 @NgModule({
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     CommonModule,
     HttpClientModule,
-    RouterModule.forRoot(AppRoutes,{useHash:true}),
+    RouterModule.forRoot(AppRoutes, { useHash: true, initialNavigation: 'enabled' }),
     FormsModule,    
     SharedAlerta,
     NavMenuModule
 
   ], 
-  declarations: [
+  declarations: [  
     AppComponent,    
     AdminLayoutComponent,
     AuthLayoutComponent        

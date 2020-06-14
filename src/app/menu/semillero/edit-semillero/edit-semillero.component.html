@@ -1,25 +1,58 @@
 <app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
 <div class="container">
-    <div class="detalle2" style="width: 100%;margin-left: 0%;margin-top:5rem">
+    <div class="detalle2" style="width: 100%;margin-left: 0%;margin-top:3rem">
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" (navChange)="onChangeNavs($event)">
             <li [ngbNavItem]="1">
               <a ngbNavLink>Información</a>
               <ng-template ngbNavContent>
-                  <!-- <div class="row no-gutters">
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                <div class="row no-gutters">
+                  <div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                          Información del director de grupo
+                        </div>
+                        <div class="card-body">
+                        <div class="row">
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                                <label>{{infoNombre}}</label>                                    
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+                              <label>{{infoApellido}}</label>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">                            
+                              <label>{{infoZona}}</label>                          
+                          </div>
+                        </div>                                          
+                        <div class="row">
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">                            
+                            <label>{{infoCentro}}</label>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">                            
+                            <label>{{infoEscuela}}</label>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">                            
+                            <label>{{infoPrograma}}</label>
+                        </div>   
+                        </div>                                                   
+                      </div>
+                  </div>
+              </div>
+                </div>
+                  <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                       <div class="card" style="margin-left: 0.5rem;margin-bottom: 0.5rem;">
                           <div class="card-header">
                             Información del semillero
                           </div>
                           <div class="card-body">
                             <div class="row">
-                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">  
+                              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">  
                                 <div class="form-group">
-                                    <label>Nombre del Grupo</label>
+                                    <label>Nombre</label>
                                     <input class="form-control form-control-sm" name="nombreGrupo" [(ngModel)]="nombre"/>    
                                 </div>			
-                            </div>	                      
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">  
+                            </div>	
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">  
                               <div class="form-group">
                                 <label>Fecha creación</label>                                 
                                 <div class="input-group">                                  
@@ -33,23 +66,8 @@
                                   </div>
                                 </div>
                               </div>   
-                            </div>	
-                          </div>
-                          <div class="row">
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">     
-                              <div class="form-group">
-                                  <label>Código Colciencias</label>
-                                  <input class="form-control form-control-sm" [(ngModel)]="GRU_COLC_CODI" />
-                              </div>      
-                          </div>  
-                      
-                          <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">     
-                              <div class="form-group">
-                              <label>Categoría Colciencias</label>
-                              <input class="form-control form-control-sm"  [(ngModel)]="GRU_CATE_COLC" />
-                              </div>
                             </div>
-                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">     
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">     
                               <div class="form-group">   
                               <label>Avalado por la UNAD</label><br>
                               <div class="form-check form-check-inline"  >
@@ -65,77 +83,52 @@
                                 </label>
                               </div>                           
                               </div>
-                            </div>  
-                          </div>                        
+                            </div>  	
+                          </div>     
                           <div class="row">
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">     
-                              <div class="form-group">                             
-                                <label>Área</label>               
-                                <select class="form-control form-control-sm" [(ngModel)]="selArea" >
-                                 <option [ngValue]=null>Seleccione ...</option>
-                                 <option *ngFor="let area of listArea" [ngValue]="area">
-                                    {{area.ARE_NOMB}}
-                                 </option>
-                               </select>
-                              </div>
-                            </div>                        
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">     
-                              <div class="form-group">                                  
-                                <label>Centro</label>               
-                                <select class="form-control form-control-sm" [(ngModel)]="selCentro" >
-                                 <option [ngValue]=null>Seleccione ...</option>
-                                 <option *ngFor="let centro of listCentro" [ngValue]="centro">
-                                    {{centro.CEN_NOMB}}
-                                 </option>
-                               </select>
-                              </div>
-                            </div>  
-                           
-                          </div>                                              
-                        </div>
-                    </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                          <div class="card">
-                              <div class="card-header">
-                                Información del director de grupo
-                              </div>
-                              <div class="card-body">
-                              <div class="row">
-                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">                                                                        
-                                      <label>{{infoNombre}}</label>                                    
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                      <label>{{infoApellido}}</label>
-                                  </div>
-                              </div>
-                              <div class="row">
-                                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <label>{{infoZona}}</label>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                    <label>{{infoCentro}}</label>
-                                </div>
-                              </div>
-                              <div class="row">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                  <label>{{infoEscuela}}</label>
-                                </div>
-                              </div>
-                              <div class="row">
-                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                  <label>{{infoPrograma}}</label>
-                              </div>   
-                              </div>                            
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">                                                                        
+                              <div class="form-group">
+                                <label>Objetivos</label>
+                                <textarea class="form-control" name="objetivo" [(ngModel)]="objetivos" rows="2"></textarea>
                             </div>
+                          </div>     
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">                                                                        
+                              <div class="form-group">
+                                <label>Misión</label>
+                                <textarea class="form-control" name="objetivo" [(ngModel)]="mision" rows="2"></textarea>
+                            </div>
+                            </div>  
+                            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">                                                                        
+                              <div class="form-group">
+                                <label>Visión</label>
+                                   <textarea class="form-control" name="objetivo" [(ngModel)]="vision" rows="2"></textarea>
+                              </div>
+                            </div>      
+                                          
+                          </div>                                
+                          <div class="row">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">                                                                        
+                              <div class="form-group">
+                                <label>Proyección regional</label>
+                                <textarea class="form-control" name="objetivo" [(ngModel)]="proyeccionRegional" rows="1"></textarea>
+                            </div>
+                            </div>  
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">                                                                        
+                              <div class="form-group">
+                                <label>Temáticas de investigación</label>
+                                <textarea class="form-control" name="objetivo" [(ngModel)]="tematicaInvestigacion" rows="1"></textarea>
+                            </div>
+                            </div>                       
+                          </div>         
                         </div>
                     </div>
-                  
-                  </div>-->
+                    </div>
+                   
+                  </div>
+                 
+                 
+                 
+                 
                   <div class="card-footer text-muted text-right">
                     <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
                     <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
@@ -145,31 +138,616 @@
             <li [ngbNavItem]="2" [disabled]="disabled">
               <a ngbNavLink>Líneas de investigación</a>
               <ng-template ngbNavContent>
-               
+                <div class="container">
+                  <div *ngIf="showDataLinea">
+                  <div class="material-datatables">                   
+                    <div class="nuevo"> 
+                        <div class="icono">
+                          <button type="button" class="btn btn-outline-success btn-sm"  (click)="showFormCreacionLineas()" title="Agregar línea de investigación" >Nueva línea</button>                                    
+                        </div>                       
+                    </div>                                              
+                    <table id="dataLineas" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                    style="width:80%">
+    
+                    </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!showDataLinea">
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                          <div class="card-header" style="text-align: center;">
+                            {{textoEstadoLinea}}
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Líneas de investigación</label>
+                                      <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selLinea">
+                                        <option [ngValue]=null>Seleccione ...</option>
+                                        <option  *ngFor="let item of listLinea" [ngValue]="item">{{item.lin_desc}}</option>       
+                                        
+                                        </select>
+                                      <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                                      </div>  
+                              </div>
+
+                            </div>   
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Fecha inicio</label>                                 
+                                  <div class="input-group">                                    
+                                    <input class="form-control form-control-sm" 
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaInicioLinea" ngbDatepicker #dateIniciaLinea="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateIniciaLinea.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group" style="margin-top:0.37rem">
+                                  <div class="form-check form-check-inline"  >
+                                    <input class="form-check-input" type="checkbox" name="dateEndLinea" id="exampleRadios1"  [checked]="disabledFechaFinLinea" (change)="onChangeDisabledFechaFinLinea()">
+                                    <label class="form-check-label" for="dateEndLinea">
+                                      Fecha finalización
+                                    </label>
+                                  </div>                                   
+                                  <div class="input-group"  >                                    
+                                    <input class="form-control form-control-sm" [disabled]="!disabledFechaFinLinea"
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaTerminaLinea" ngbDatepicker #dateTerminaLinea="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button [disabled]="!disabledFechaFinLinea" class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateTerminaLinea.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                            </div>                    
+                                  <div class="row no-gutters" style="margin-top:1rem;">
+                                    <div class="col-auto mr-auto"></div>                
+                                        <div class="col-auto">
+                                            <div class="btn-buttons">
+                                                <div class="btn-salvar">
+                                                        <i class="fas fa-save" (click)="onClicGuardarLinea()" title="Guardar"></i>
+                                                </div>
+                                                <div class="btn-salir">
+                                                    <i class="fas  fa-reply" (click)="goBackLineas()" title="Volver"></i>
+                                                </div>                        
+                                            </div>                             
+                                    </div>   
+                                </div>           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                <div class="card-footer text-muted text-right">          
+                  <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                </div>
               </ng-template>
             </li>
             <li [ngbNavItem]="3" [disabled]="disabled">
               <a ngbNavLink>Integrantes</a>
               <ng-template ngbNavContent>
-               
+                <div class="container">
+                  <div *ngIf="showDataInvestigador">
+                  <div class="material-datatables">                   
+                    <div class="nuevo"> 
+                        <div class="icono">
+                          <button type="button" class="btn btn-outline-success btn-sm"  (click)="showFormCreacionInvestigador()" title="Agregar integrante" >Nuevo integrante</button>                                                                    
+                        </div>                       
+                    </div>                                              
+                    <table id="dataInvestigador" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                    style="width:80%">
+    
+                    </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!showDataInvestigador">
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                          <div class="card-header" style="text-align: center;">
+                            {{textoEstadoInvestigador}}
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Investigadores</label>
+                                      <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selInvestigador">
+                                        <option [ngValue]=null>Seleccione ...</option>
+                                        <option  *ngFor="let item of listInvestigador" [ngValue]="item">{{item.INV_NOMB}} {{item.INV_APEL}}</option>       
+                                        
+                                        </select>                                      
+                                      </div>  
+                              </div>
+
+                            </div>   
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Tipo vinculación</label>
+                                      <select  class="form-control form-control-sm" id="IdTipoVinculacion" [(ngModel)]="selTipoVinculacion">
+                                        <option [ngValue]=null>Seleccione ...</option>
+                                        <option  *ngFor="let item of listTipoVinculacion" [ngValue]="item">{{item.TIV_DESC}}</option>       
+                                        
+                                        </select>                                      
+                                      </div>  
+                              </div>
+
+                            </div>   
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Fecha inicio</label>                                 
+                                  <div class="input-group">                                    
+                                    <input class="form-control form-control-sm" 
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaInicioInvestigador" ngbDatepicker #dateIniciaInvestigador="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateIniciaInvestigador.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group" style="margin-top:0.37rem">
+                                  <div class="form-check form-check-inline"  >
+                                    <input class="form-check-input" type="checkbox" name="dateEndInvestigador" id="exampleInvestigador"  [checked]="disabledFechaFinInvestigador" (change)="onChangeDisabledFechaFinInvestigador()">
+                                    <label class="form-check-label" for="dateEndLinea">
+                                      Fecha finalización
+                                    </label>
+                                  </div>                                   
+                                  <div class="input-group"  >                                    
+                                    <input class="form-control form-control-sm" [disabled]="!disabledFechaFinInvestigador"
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaTerminaInvestigador" ngbDatepicker #dateTerminaInvestigador="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button [disabled]="!disabledFechaFinInvestigador" class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateTerminaInvestigador.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                            </div>                    
+                                  <div class="row no-gutters" style="margin-top:1rem;">
+                                    <div class="col-auto mr-auto"></div>                
+                                        <div class="col-auto">
+                                            <div class="btn-buttons">
+                                                <div class="btn-salvar">
+                                                        <i class="fas fa-save" (click)="onClicGuardarInvestigador()" title="Guardar"></i>
+                                                </div>
+                                                <div class="btn-salir">
+                                                    <i class="fas  fa-reply" (click)="goBackInvestigador()" title="Volver"></i>
+                                                </div>                        
+                                            </div>                             
+                                    </div>   
+                                </div>           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                <div class="card-footer text-muted text-right">          
+                  <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                </div>
               </ng-template>
             </li>
             <li [ngbNavItem]="4" [disabled]="disabled">
               <a ngbNavLink>Programas académicos</a>
               <ng-template ngbNavContent>
-              
+                <div class="container">
+                  <div *ngIf="showDataProgramaAcademico">
+                  <div class="material-datatables">                   
+                    <div class="nuevo"> 
+                        <div class="icono">
+                          <button type="button" class="btn btn-outline-success btn-sm"  (click)="showFormCreacionProgramaAcademico()" title="Agregar programa académico" >Nuevo programa</button>                                    
+                        </div>                       
+                    </div>                                              
+                    <table id="dataProgramaAcademico" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                    style="width:80%">
+    
+                    </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!showDataProgramaAcademico">
+                    <div class="row">
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="card">
+                          <div class="card-header" style="text-align: center;">
+                            {{textoEstadoProgramaAcademico}}
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Programas académicos</label>
+                                      <select  class="form-control form-control-sm" id="IdProgramaAcademico" [(ngModel)]="selProgramaAcademico">
+                                        <option [ngValue]=null>Seleccione ...</option>
+                                        <option  *ngFor="let item of listProgramaAcademico" [ngValue]="item">{{item.PAC_NOMB}}</option>       
+                                        
+                                        </select>
+                                      <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                                      </div>  
+                              </div>
+
+                            </div>   
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Fecha inicio</label>                                 
+                                  <div class="input-group">                                    
+                                    <input class="form-control form-control-sm" 
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaInicioProgramaAcademico" ngbDatepicker #dateIniciaProgramaAcademico="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateIniciaProgramaAcademico.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group" style="margin-top:0.37rem">
+                                  <div class="form-check form-check-inline"  >
+                                    <input class="form-check-input" type="checkbox" name="dateEndProgramaAcademico" id="exampleRadios1"  [checked]="disabledFechaFinProgramaAcademico" (change)="onChangeDisabledFechaFinProgramaAcademico()">
+                                    <label class="form-check-label" for="dateEndProgramaAcademico">
+                                      Fecha finalización
+                                    </label>
+                                  </div>                                   
+                                  <div class="input-group"  >                                    
+                                    <input class="form-control form-control-sm" [disabled]="!disabledFechaFinProgramaAcademico"
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaTerminaProgramaAcademico" ngbDatepicker #dateTerminaProgramaAcademico="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button [disabled]="!disabledFechaFinProgramaAcademico" class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateTerminaProgramaAcademico.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                            </div>                    
+                                  <div class="row no-gutters" style="margin-top:1rem;">
+                                    <div class="col-auto mr-auto"></div>                
+                                        <div class="col-auto">
+                                            <div class="btn-buttons">
+                                                <div class="btn-salvar">
+                                                        <i class="fas fa-save" (click)="onClicGuardarProgramaAcademico()" title="Guardar"></i>
+                                                </div>
+                                                <div class="btn-salir">
+                                                    <i class="fas  fa-reply" (click)="goBackProgramaAcademico()" title="Volver"></i>
+                                                </div>                        
+                                            </div>                             
+                                    </div>   
+                                </div>           
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-3 col-md-3 col-sm-12 col-12">
+
+                      </div>
+                    </div>
+                  
+                  </div>
+                </div>
+                <div class="card-footer text-muted text-right">          
+                  <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                </div>
               </ng-template>
             </li>
             <li [ngbNavItem]="5" [disabled]="disabled">
               <a ngbNavLink>Proyectos y productos</a>
               <ng-template ngbNavContent>
-              
+                <div class="container">
+                  <div *ngIf="showDataProduccion">
+                    <div class="material-datatables">                   
+                      <div class="nuevo"> 
+                          <div class="icono">
+                            <button type="button" class="btn btn-outline-success btn-sm"  (click)="showFormCreacionProduccion()" title="Agregar producto" >Nuevo producto</button>                                                          
+                          </div>                       
+                      </div>    
+                    <table id="dataProduccion" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                    style="width:80%">
+                    </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!showDataProduccion">
+                   
+                    <div class="row">
+                     
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+  
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                      
+                                        
+                        <div class="card">
+                          <div class="card-header" style="text-align: center;">
+                            {{textoEstadoProduccion}}
+                          </div>
+                          <div class="card-body">
+                            <div class="row">    
+                         <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                           <div class="form-group">
+                             <label>Investigador</label>
+                                 <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selInvestigadorProd" (change)="onChangeInvestigador()">
+                                   <option [ngValue]=null>Seleccione ...</option>
+                                   <option  *ngFor="let item of listInvestigador" [ngValue]="item">{{item.INV_NOMB}} {{item.INV_APEL}}</option>       
+                                   
+                                   </select>
+                                 <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                            </div>              
+                          </div>   
+                        </div>        
+                       
+                       <div class="row">           
+                         <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                           <div class="form-group">
+                             <label>Proyecto</label>
+                                 <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selProyecto" (change)="onChangeProyecto()">
+                                   <option [ngValue]=null>Seleccione ...</option>
+                                   <option  *ngFor="let item of listProyecto" [ngValue]="item">{{item.PRO_NOMB}}</option>       
+                                   
+                                   </select>                                
+                            </div>                           
+                           </div>           
+                       </div>
+                       <div class="row">           
+                        <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                          <div class="form-group">
+                            <label>Estado proyecto</label>
+                                <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selEstadoProyecto">
+                                  <option [ngValue]=null>Seleccione ...</option>
+                                  <option  *ngFor="let item of listEstadoProyecto" [ngValue]="item">{{item.ESPROYS_NOMB}}</option>       
+                                  
+                                  </select>                                
+                           </div>                           
+                          </div>           
+                      </div>
+                       <div class="row">           
+                         <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                           <div class="form-group">
+                             <label>Productos</label>
+                                 <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selProducto" >
+                                   <option [ngValue]=null>Seleccione ...</option>
+                                   <option  *ngFor="let item of listProducto" [ngValue]="item">{{item.nombre}}</option>       
+                                   
+                                   </select>                                 
+                            </div>                    
+                           </div>                        
+                         </div> 
+                         <div class="row">           
+                          <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                            <div class="form-group">
+                              <label>Estado producto</label>
+                                  <select  class="form-control form-control-sm" id="IdLinea" [(ngModel)]="selEstadoProducto">
+                                    <option [ngValue]=null>Seleccione ...</option>
+                                    <option  *ngFor="let item of listEstadoProducto" [ngValue]="item">{{item.ESPRODS_NOMB}}</option>       
+                                    
+                                    </select>                                
+                             </div>                           
+                            </div>           
+                        </div>
+                         <div class="row">           
+                           <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                  
+                             <div class="form-group">
+                               <label>Fecha inicio</label>                                 
+                               <div class="input-group">                                    
+                                 <input class="form-control form-control-sm" 
+                                        name="dp" #c2="ngModel" [(ngModel)]="fechaInicioProyecto" ngbDatepicker #dateIniciaProyecto="ngbDatepicker" >
+                                 <div class="input-group-append">
+                                   <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateIniciaProyecto.toggle()" type="button">
+                                    
+                                   </button>
+                                  
+                                 </div>
+                               </div>
+                              </div>                      
+                             </div>  
+                             <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                  
+                              <div class="form-group" style="margin-top:0.37rem">
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" name="dateEndProduccion" id="exampleProduccion"  [checked]="disabledFechaFinProduccion" (change)="onChangeDisabledFechaFinProduccion()">
+                                  <label class="form-check-label" for="dateEndProduccion">
+                                    Fecha finalización
+                                  </label>
+                                </div>                                     
+                                <div class="input-group">                                    
+                                  <input class="form-control form-control-sm" [disabled]="!disabledFechaFinProduccion"
+                                         name="dp" #c2="ngModel" [(ngModel)]="fechaFinalizaProyecto" ngbDatepicker #dateFinalizaProyecto="ngbDatepicker" >
+                                  <div class="input-group-append">
+                                    <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateFinalizaProyecto.toggle()" type="button">
+                                     
+                                    </button>
+                                   
+                                  </div>
+                                </div>
+                               </div>                      
+                              </div>                       
+                           </div>                 
+                            </div>
+                         <div class="row no-gutters" style="margin-top:1rem;">
+                           <div class="col-auto mr-auto"></div>                
+                               <div class="col-auto">
+                                   <div class="btn-buttons">
+                                    <div class="btn-salvar">
+                                      <i class="fas fa-save" (click)="onClicGuardarProduccion()" title="Guardar"></i>
+                                    </div>  
+                                        <div class="btn-salir">
+                                          <i class="fas  fa-reply" (click)="goBackProducccion()" title="Volver"></i>
+                                      </div> 
+                                                                                              
+                                   </div>                             
+                           </div>   
+                       </div>         
+                      </div>
+                       
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+  
+                      </div>
+                    </div>
+                      
+                  </div>
+  
+                  
+                   <div class="card-footer text-muted text-right">          
+                    <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                  </div>
+                 </div>
               </ng-template>
             </li>
             <li [ngbNavItem]="6" [disabled]="disabled">
               <a ngbNavLink>Documentos</a>
               <ng-template ngbNavContent>
-              
+                <div class="container">
+                  <div *ngIf="showDataDocumento">
+                    <div class="material-datatables">                   
+                      <div class="nuevo"> 
+                          <div class="icono">
+                            <button type="button" class="btn btn-outline-success btn-sm"  (click)="showFormCreacionDocumento()" title="Agregar plan trabajo" >Nuevo plan trabajo</button>                                                          
+                          </div>                       
+                      </div>    
+                    <table id="dataDocumento" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                    style="width:80%">
+                    </table>
+                    </div>
+                  </div>
+                  <div *ngIf="!showDataDocumento">
+                   
+                    <div class="row">
+                     
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+  
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                      
+                                        
+                        <div class="card">
+                          <div class="card-header" style="text-align: center;">
+                            {{textoEstadoDocumento}}
+                          </div>
+                          <div class="card-body">                                                                     
+                       <div class="row">           
+                         <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                           <div class="form-group">
+                             <label>Nombre</label>
+                                 <input class="form-control form-control-sm" [(ngModel)]="nombreDocumento" />
+                            </div>                    
+                           </div>                        
+                         </div> 
+                         <div class="row">           
+                          <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                            <div class="form-group">
+                              <label>Seleccione el plan trabajo</label>
+                              <input   style="display: none"  type="file" (change)="onFileChanged($event)" #fileInput>   
+                              <button  type="button" class="btn btn-link btn-sm" (click)="fileInput.click()" title="Seleccione un archivo"><i class="fas fa-file-upload"></i></button>
+                             </div>                    
+                            </div>                        
+                          </div> 
+                          <div class="row">           
+                            <div class="col-xl-12 col-lg-12 col-sm-12 col-12">                  
+                              <span>{{archivoSeleccionado}}</span>
+                            </div> 
+                          </div>
+                         <div class="row">           
+                           <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                  
+                             <div class="form-group">
+                               <label>Fecha inicio</label>                                 
+                               <div class="input-group">                                    
+                                 <input class="form-control form-control-sm" 
+                                        name="dp" #c2="ngModel" [(ngModel)]="fechaInicioDocumento" ngbDatepicker #dateInicioPlanTRabajo="ngbDatepicker" >
+                                 <div class="input-group-append">
+                                   <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateInicioPlanTRabajo.toggle()" type="button">
+                                   
+                                   </button>
+                                  
+                                 </div>
+                               </div>
+                              </div>                      
+                             </div>  
+                             <div class="col-xl-6 col-lg-6 col-sm-12 col-12">                  
+                              <div class="form-group" style="margin-top:0.37rem">
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="checkbox" name="dateEndDocumento" id="exampleDate"  [checked]="disabledFechaFinDocumento" (change)="onChangeDisabledFechaFinDocumento()">
+                                  <label class="form-check-label" for="dateEndDocumento">
+                                    Fecha finalización
+                                  </label>
+                                </div>                                     
+                                <div class="input-group">                                    
+                                  <input class="form-control form-control-sm" [disabled]="!disabledFechaFinDocumento"
+                                         name="dp" #c2="ngModel" [(ngModel)]="fechaFinDocumento" ngbDatepicker #dateFinDocumento="ngbDatepicker" >
+                                  <div class="input-group-append">
+                                    <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateFinDocumento.toggle()" type="button">
+                                     
+                                    </button>
+                                   
+                                  </div>
+                                </div>
+                               </div>                      
+                              </div>                       
+                           </div>                 
+                            </div>
+                         <div class="row no-gutters" style="margin-top:1rem;">
+                           <div class="col-auto mr-auto"></div>                
+                               <div class="col-auto">
+                                   <div class="btn-buttons">
+                                    <div class="btn-salvar">
+                                      <i class="fas fa-save" (click)="onClicGuardarDocumento()" title="Guardar"></i>
+                                    </div>  
+                                        <div class="btn-salir">
+                                          <i class="fas  fa-reply" (click)="goBackDocumento()" title="Volver"></i>
+                                      </div> 
+                                                                                              
+                                   </div>                             
+                           </div>   
+                       </div>         
+                      </div>
+                       
+                      </div>
+                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+  
+                      </div>
+                    </div>
+                      
+                  </div>
+  
+                  
+                   <div class="card-footer text-muted text-right">          
+                    <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                  </div>
+                 </div>
               </ng-template>
             </li>
           </ul>

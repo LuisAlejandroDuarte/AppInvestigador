@@ -138,8 +138,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/investigador',result.inv_codi]);  
             }
           },error=> {
-            $('#iconoEspera').hide();
-            console.clear();
+            $('#iconoEspera').hide();            
             var errorComponent = new ErrorComponent();            
             this.mensaje =errorComponent.GenerarMensaje(error);          
             this.mensaje.nVentana="IdError";
@@ -240,38 +239,71 @@ export class LoginComponent implements OnInit {
           });
         }  
 
-        // this.investigadorService.getValidar(usuario).subscribe(result=>{
-        //   let res = new Usuario();
-        //   if (result!=null)
-        //   {
-        //       $('#iconoEspera').hide();
-        //       localStorage.setItem("logueado","1");
-        //       this.router.navigate(["/menu/Administrar/investigador/" + result[0].inv_codi ]);  
-        //   }
-        //   else
-        //     {
-        //       let mensaje =new Mensaje();
-        //       mensaje.tipo=TipoMensaje.Advertencia;
-        //       this.mensaje = new Mensaje(mensaje);
-        //       this.mensaje.tipo=TipoMensaje.Error;
-        //       this.mensaje.titulo="Validando Investigador";
-        //       this.mensaje.cuerpo="Puede ser que el usuario no este creado como investigador o el usuario y clave no corresponden";
-        //       this.mensaje.nVentana="IdError";         
-        //       this.alerta.onChangedMyId("IdError");
-        //       $('#iconoEspera').hide();
-        //       setTimeout(()=>{
-        //         $('#IdError').show();     
-        //       });
-        //     }
-        // },error=> {
-        //       $('#iconoEspera').hide();
-        //       console.clear();
-        //       var errorComponent = new ErrorComponent();            
-        //       this.mensaje =errorComponent.GenerarMensaje(error);          
-        //       this.mensaje.nVentana="IdError";
-        //       this.alerta.onChangedMyId("IdError");                      
-        //       $('#IdError').show();  
-        // });
+        if (this.route.snapshot.params.id==5)       
+        {
+          this.serviceUsuario.getUsuario(usuario).subscribe(res=>{
+            if (res==null)
+              {
+                let mensaje =new Mensaje();
+                mensaje.tipo=TipoMensaje.Advertencia;
+                this.mensaje = new Mensaje(mensaje);
+                this.mensaje.tipo=TipoMensaje.Error;
+                this.mensaje.titulo="Validando usuario";
+                this.mensaje.cuerpo="El usuario o la contraseña no corresponden";
+                this.mensaje.nVentana="IdError";         
+                this.alerta.onChangedMyId("IdError");
+                $('#iconoEspera').hide();
+                setTimeout(()=>{
+                    $('#IdError').show();     
+                  });
+              }
+              else
+              {
+  
+                if (res.use_cod_tipo==1)
+                {
+                  let mensaje =new Mensaje();
+                  mensaje.tipo=TipoMensaje.Advertencia;
+                  this.mensaje = new Mensaje(mensaje);
+                  this.mensaje.tipo=TipoMensaje.Error;
+                  this.mensaje.titulo="Validando usuario";
+                  this.mensaje.cuerpo="No es usuario administrador";
+                  this.mensaje.nVentana="IdError";         
+                  this.alerta.onChangedMyId("IdError");
+                  $('#iconoEspera').hide();
+                  setTimeout(()=>{
+                      $('#IdError').show();     
+                      return;
+                    });
+                }
+                else
+                {
+  
+                let user= new logueado();
+                user.use_cod_tipo=res.use_cod_tipo;
+                user.use_codi=res.use_codi;                  
+                user.modulos=Array<Modulo>(2);                  
+                  user.modulos[0]=1;
+                  user.modulos[1]=5;
+  
+                  localStorage.setItem("user",JSON.stringify(user));
+  
+                  this.router.navigate(['/convocatoria/gestion']);  
+                  $('#iconoEspera').hide();
+                }
+              }
+                },error=> {
+                  $('#iconoEspera').hide();
+                  console.clear();
+                  var errorComponent = new ErrorComponent();            
+                  this.mensaje =errorComponent.GenerarMensaje(error);          
+                  this.mensaje.nVentana="IdError";
+                  this.alerta.onChangedMyId("IdError");                      
+                  $('#IdError').show();  
+                });
+        }  
+
+   
     }
     else
     {
@@ -307,7 +339,12 @@ export class LoginComponent implements OnInit {
     if (this.route.snapshot.params.id==4)
     {
       this.headText="Semillero";
-    }    
+    }  
+    
+    if (this.route.snapshot.params.id==5)
+    {
+      this.headText="Convocatoria gestión";
+    }  
   }
 
   onClicBoton1(event){  

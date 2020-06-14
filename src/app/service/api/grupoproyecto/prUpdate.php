@@ -9,7 +9,7 @@
         id_proy =" . $data["id_proy"] . ",        
         id_prod =" . $data["id_prod"] . ",
         id_inve =" . $data["id_inve"] . ",
-        fech_ini ='" . $data["fech_ini"] . "' ,  
+        fech_ini ='" .  str_replace('Z','',$data["fech_ini"]) . "' ,  
         fech_term =null                         
         WHERE id=" . $data["id"] ;            
     }
@@ -20,13 +20,13 @@
       id_proy =" . $data["id_proy"] . ",        
       id_prod =" . $data["id_prod"] . ",
       id_inve =" . $data["id_inve"] . ",
-      fech_ini ='" . $data["fech_ini"] . "', 
-      fech_term ='" . $data["fech_term"] . "'              
+      fech_ini ='" .  str_replace('Z','',$data["fech_ini"]) . "', 
+      fech_term ='" .  str_replace('Z','',$data["fech_term"]) . "'              
       WHERE id=" . $data["id"] ;           
     }
 
       $execute = new  DataBase();
-      $result= $execute->executeUpdateDeleteSql($SQL,true);        
+      $result= $execute->executeUpdateDeleteSql($SQL);        
       echo json_encode($result);      
     
     

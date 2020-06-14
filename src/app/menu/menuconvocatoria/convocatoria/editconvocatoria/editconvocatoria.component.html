@@ -1,0 +1,198 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+
+
+
+<div class="container">
+    <div class="detalle2" style="width: 100%;margin-left: 0%;margin-top:5rem">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" (navChange)="onChangeNavs($event)">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>Información General Convocatoria </a>
+              <ng-template ngbNavContent>
+                  <div class="row no-gutters">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="card" style="margin: 0.5rem">
+                          <div class="card-header">
+                           
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+                              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Número</label>
+                                  <input class="form-control form-control-sm" name="numero" [(ngModel)]="numero"/>    
+                                 </div>           
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Descripción</label>
+                                  <input class="form-control form-control-sm" name="descripcion" [(ngModel)]="descripcion"/>    
+                                 </div>           
+                              </div>
+                              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Puntaje</label>
+                                  <input class="form-control form-control-sm" (keydown)="valuechange($event)"  name="puntaje" [(ngModel)]="puntaje"/>    
+                                 </div>           
+                              </div>
+                            </div>
+                            
+                            <div class="row">
+                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Tipo convocatoria</label>
+                                      <select  class="form-control form-control-sm" id="IdSelConvocatoria" [(ngModel)]="selTipoConvocatoria">
+                                        <option [ngValue]=null>Seleccione ...</option>
+                                        <option  *ngFor="let item of listTipoConvocatoria" [ngValue]="item">{{item.TCO_DESC}}</option>       
+                                        
+                                        </select>
+                                      <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                                      </div>     
+                              </div>
+                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Fecha inicio</label>                                 
+                                  <div class="input-group">                                    
+                                    <input class="form-control form-control-sm" 
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaInicioConvocatoria" ngbDatepicker #dateIniciaConvocatoria="ngbDatepicker" [maxDate]="maxDate">
+                                    <div class="input-group-append">
+                                      <button  class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateIniciaConvocatoria.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                                <div class="form-group" style="margin-top:0.37rem">
+                                  <div class="form-check form-check-inline"  >
+                                    <input class="form-check-input" type="checkbox" name="dateEndLinea" id="exampleRadios1"  [checked]="disabledFechaFinConvocatoria" (change)="onChangeDisabledFechaFinConvocatoria()">
+                                    <label class="form-check-label" for="dateEndLinea">
+                                      Fecha finalización
+                                    </label>
+                                  </div>                                   
+                                  <div class="input-group"  >                                    
+                                    <input class="form-control form-control-sm" [disabled]="!disabledFechaFinConvocatoria"
+                                           name="dp" #c2="ngModel" [(ngModel)]="fechaTerminaConvocatoria" ngbDatepicker #dateTerminaConvocatoria="ngbDatepicker" >
+                                    <div class="input-group-append">
+                                      <button [disabled]="!disabledFechaFinConvocatoria" class="btn btn-secondary btn-sm fa fa-calendar" (click)="dateTerminaConvocatoria.toggle()" type="button">
+                                       
+                                      </button>
+                                     
+                                    </div>
+                                  </div>
+                              </div>   
+                              </div>
+                             
+                            </div>   
+                           
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Texto</label>
+                                  <input class="form-control form-control-sm" name="numero" [(ngModel)]="texto"/>    
+                                 </div>  
+                                 <span>{{textoArchivoSeleccionado}}</span>
+                                 <div class="icons-controls">
+                                  <input   style="display: none"  type="file" (change)="onTextoFileChanged($event)" #textoFileInput>   
+                                  <button  type="button" class="btn btn-link btn-sm" (click)="textoFileInput.click()" title="Seleccione un archivo"> <i style="color:green" class="fas fa-cloud-upload-alt"></i></button>                                 
+                                  <button  type="button" class="btn btn-link btn-sm" (click)="onClicDownloadTexto()"> <i style="color:blue" class="fas fa-cloud-download-alt"></i></button>                                 
+                                                               
+                                </div>
+                               
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                  <label>Resolución</label>
+                                  <input class="form-control form-control-sm" name="numero" [(ngModel)]="resolucion"/>    
+                                 </div> 
+                                 <span>{{resolucionArchivoSeleccionado}}</span>
+                                 <div class="icons-controls">
+                                  <input   style="display: none"  type="file" (change)="onResolucionFileChanged($event)" #resolucionFileInput>   
+                                  <button  type="button" class="btn btn-link btn-sm" (click)="resolucionFileInput.click()" title="Seleccione un archivo"> <i style="color:green" class="fas fa-cloud-upload-alt"></i></button>                                 
+                                  <button  type="button" class="btn btn-link btn-sm" (click)="onClicDownloadResolucion()"> <i style="color:blue" class="fas fa-cloud-download-alt"></i></button>                                 
+                                </div>                                 
+                              </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    </div>
+                  
+                  </div>
+                  <div class="card-footer text-muted text-right">
+                    <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                  </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2" [disabled]="disabled">
+              <a ngbNavLink>Valoración de Parámetros</a>
+              <ng-template ngbNavContent>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Parámetro</label>
+                            <select  class="form-control form-control-sm" id="IdSelParametro" [(ngModel)]="selParametro">
+                              <option [ngValue]=null>Seleccione ...</option>
+                              <option  *ngFor="let item of listParametro" [ngValue]="item">{{item.CPA_NOMB}}</option>       
+                              
+                              </select>
+                            <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                            </div>     
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-10 col-sm-10 col-10">
+                      <div class="form-group">
+                        <label>Valor</label>
+                                  <input class="form-control form-control-sm" name="numero"  (keydown)="valuechange($event)" [(ngModel)]="valorParametro"/>    
+                            </div>     
+                           
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                      <div class="form-group">
+                        <label></label>                               
+                        <i class="fas fa-plus" title="Agregar parámetro" (click)="onClickAgregarParametro()" style="margin-top:1.9rem;cursor: pointer;font-size: 2rem;color:blue"></i>
+                      </div>     
+                           
+                    </div>
+                    
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                  <ul class="list-group">                    
+                    <li class="list-group-item" *ngFor="let item of listConvocatoriaParametro">
+                      <div class="row">
+                        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
+                          {{item.nombreParametro}}
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-12">
+                         {{item.PCO_VALO}}
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                          <div class="form-group">
+                            <label></label>                               
+                            <i class="far fa-trash-alt" title="Eliminar parámetro" (click)="onClickEliminarParametro(item)" style="cursor: pointer;font-size: 1rem;color:red"></i>
+                          </div>     
+                               
+                        </div>
+                      </div>
+                    </li>                                        
+                  </ul>
+                  </div>
+                </div>
+                </div>
+                <div class="card-footer text-muted text-right" style="margin-top:1rem;">
+                  <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+                  <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                </div>
+              </ng-template>
+            </li>
+            
+          </ul>
+         
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+         
+    </div>
+   
+</div>

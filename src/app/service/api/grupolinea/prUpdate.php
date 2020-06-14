@@ -6,7 +6,7 @@
   if (isset($data["gli_fech_term"])==null)
     {
       $SQL ="UPDATE sgi_grup_line_inve set 
-        gli_fech_inic ='" . $data["gli_fech_inic"] . "',
+        gli_fech_inic ='" .  str_replace('Z','',$data["gli_fech_inic"]) . "',
         gli_fech_term=null,
         gli_line_inve_codi = " . $data["gli_line_inve_codi"] . "
         WHERE gli_codi=" . $data["gli_codi"] ;            
@@ -15,14 +15,14 @@
     {      
 
         $SQL ="UPDATE sgi_grup_line_inve set 
-        gli_fech_inic ='" . $data["gli_fech_inic"] . "',
+        gli_fech_inic ='" .  str_replace('Z','',$data["gli_fech_inic"]) . "',
         gli_line_inve_codi = " . $data["gli_line_inve_codi"] . ",
-        gli_fech_term='"  . $data["gli_fech_term"] . "'
+        gli_fech_term='"  .  str_replace('Z','',$data["gli_fech_term"]) . "'
         WHERE gli_codi=" . $data["gli_codi"] ;           
     }
 
       $execute = new  DataBase();
-      $result= $execute->executeUpdateDeleteSql($SQL,true);        
+      $result= $execute->executeUpdateDeleteSql($SQL);        
       echo json_encode($result);      
     
     

@@ -1,0 +1,41 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+<div class="container">
+    <div class="list-group">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">Propuesta</h5>          
+                    </div>
+                    <p>{{propuesta}}</p>
+                    <div class="d-flex w-100 justify-content-between">
+                      <h5 class="mb-1">Convocatoria</h5>            
+                    </div>
+                    <p>{{convocatoria}}</p>
+                  </div>  
+            </div>
+        </div>
+      
+                <div class="list-group-item list-group-item-action flex-column align-items-center">
+                    <div class="d-flex w-100 .justify-content-sm-center">
+                        <h5 class="mb-1" style="font-size: 1rem;">Evaluación total asignada</h5>          
+                      </div>
+                      <input class="form-control form-control-sm" [(ngModel)]="valor" style="width:5rem"  (keydown)="valuechange($event)">
+                      <div class="d-flex w-100">
+                        <label class="mb-1">Cargar evaluación propuesta</label>
+                        <button  type="button" class="btn btn-link btn-sm" (click)="textoFileInput.click()" title="Seleccione un archivo"> <i style="color:green" class="fas fa-cloud-upload-alt"></i></button>
+                      </div>                     
+                      <a [href]="documentoArchivoSeleccionado" style="font-size: 0.7rem;" target="_blank">{{documento}}</a>
+                      <div class="icons-controls">
+                        <input   style="display: none"  type="file" (change)="onDocumentoFileChanged($event)" #textoFileInput>                                                                                
+                      </div>
+                  </div>  
+            
+        <div class="card-footer text-muted text-right" style="margin-top:1rem;">
+            <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+            <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+          </div>
+        
+      </div>
+    
+</div>

@@ -12,6 +12,8 @@ export class Convocatoria
     CON_TIPO_CONV_CODI :number;
     CON_PUNT_TOTA:number;
 
-
+    nombreTipoConvocatoria:string;
+    fechaInicioString:string;
+    fechaFinString:string;
     accion:string;
 }

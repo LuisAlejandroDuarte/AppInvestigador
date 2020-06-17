@@ -164,4 +164,30 @@
       return;
     }
 
+    if($Accion=="ProgramaEscuela")
+    {
+      $SQL="SELECT P.PAC_NOMB AS Programa,P.PAC_CODI, E.ESC_NOMB AS Escuela,E.ESC_CODI FROM sgi_inve AS I INNER JOIN 
+      sgi_prog_acad AS P ON P.PAC_CODI = I.INV_PROG_ACAD_CODI INNER JOIN sgi_escu AS E ON E.ESC_CODI = P.PAC_ESCU_CODI
+      WHERE INV_CODI = " . $data['INV_CODI'] ;
+
+      $execute = new  DataBase();
+      $result= $execute->executeSql($SQL);
+
+      echo json_encode($result);      
+      return;
+    }
+    if ($Accion=="Evaluador")
+    {
+      $SQL="SELECT concat(I.INV_NOMB,' ',I.INV_APEL) AS Nombre,I.INV_CODI,C.TICA_NOMB As Cargo,C.TICA_CODI,PA.PAC_NOMB As Programa,
+       PA.PAC_CODI,E.ESC_NOMB AS Escuela,E.ESC_CODI FROM sgi_inve As I LEFT JOIN sgi_tipo_cargo AS C ON 
+      C.TICA_CODI=I.INV_TICA_CODI INNER JOIN sgi_prog_acad AS PA ON PA.PAC_CODI = I.INV_PROG_ACAD_CODI 
+      INNER JOIN sgi_escu As E ON E.ESC_CODI=PA.PAC_ESCU_CODI";
+       $execute = new  DataBase();
+       $result= $execute->executeArraySql($SQL);
+       
+       echo json_encode($result);      
+       return;
+    }
+
+
  ?>

@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpInterceptor} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../../entidad/usuario/entidad.usuario';
-import { TipoDocumento, Investigador } from '../../entidad/investigador/entidad.investigador';
+import { TipoDocumento, Investigador, Evaluador } from '../../entidad/investigador/entidad.investigador';
 
 
 const httpOptions = {  
@@ -39,6 +39,15 @@ export class InvestigadorService {
      getAll(investigador:Investigador) : Observable<Investigador[]>{                   
       return this.http.post<Investigador[]>(this.baseUrl + 'prInvestigador.php',JSON.stringify(investigador), httpOptions);
     }  
+
+    getEvaluador(investigador:Investigador) : Observable<Evaluador[]>{                   
+      return this.http.post<Evaluador[]>(this.baseUrl + 'prInvestigador.php',JSON.stringify(investigador), httpOptions);
+    }  
+
+    getProgramaEscuela(investigador:Investigador) : Observable<any>{                   
+      return this.http.post<any>(this.baseUrl + 'prInvestigador.php',JSON.stringify(investigador), httpOptions);
+    }  
+    
 
      setInvestigador(investigador:Investigador) {                   
       return this.http.post(this.baseUrl + 'prInvestigador.php',JSON.stringify(investigador), httpOptions);

@@ -31,4 +31,17 @@ export class TipoDocumento
 
     accion:string;
 }
+export class  Evaluador {
+    Nombre:string;
+    Cargo:string;
+    Programa:string;
+    Escuela:string;
+    INV_CODI:number;
+    TICA_CODI:number;
+    ESC_CODI:number;
+    PAC_NOMB:number;
+    PCJU_CODI :number
+
+    seleccionado:boolean;
+}
 

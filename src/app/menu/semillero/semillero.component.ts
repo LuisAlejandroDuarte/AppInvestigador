@@ -136,7 +136,7 @@ export class SemilleroComponent implements OnInit {
     let semillero= new Semillero();   
     semillero.accion="ALL";
     $('#iconoEspera').show();
-    this.serviceSemillero.getALL().subscribe(res=>{
+    this.serviceSemillero.getByInve(user.inv_codi).subscribe(res=>{
       if (res!=null)
       {
         this.table = $('#dataSemillero').DataTable();

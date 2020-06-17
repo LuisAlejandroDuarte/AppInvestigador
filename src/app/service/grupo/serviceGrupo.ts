@@ -21,6 +21,11 @@ export class GrupoService {
       return this.http.post<any[]>(this.baseUrl + 'grupo/prSelect.php',JSON.stringify(grupo), {headers});
     }  
 
+      
+    byInve (grupo:Grupo):Observable<any[]>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.post<any[]>(this.baseUrl + 'grupo/prSelect.php',JSON.stringify(grupo), {headers});
+    }  
 
     insert (grupo:Grupo):Observable<any>{
       const headers = new HttpHeaders().set('content-type', 'application/json');  

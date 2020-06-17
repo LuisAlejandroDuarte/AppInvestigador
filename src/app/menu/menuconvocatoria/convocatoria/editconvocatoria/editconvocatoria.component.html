@@ -188,6 +188,66 @@
                 </div>
               </ng-template>
             </li>
+            <li [ngbNavItem]="3" [disabled]="disabled">
+              <a ngbNavLink>Asignación de Evaluadores</a>
+              <ng-template ngbNavContent>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Propuestas</label>
+                            <select  class="form-control form-control-sm" id="IdSelParametro" [(ngModel)]="selPropuesta" (change)="onChangePropuesta()">
+                              <option [ngValue]=null>Seleccione ...</option>
+                              <option  *ngFor="let item of listPropuesta" [ngValue]="item">{{item.PRO_NOMB}}</option>       
+                              
+                              </select>
+                            <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                            </div>     
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <table id="dataInvestigador" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                      style="width:100%">
+
+                        </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-10">
+                      <div class="form-group">
+                        <label>Evaluadores</label>
+                            <select  class="form-control form-control-sm" id="IdSelParametro" [(ngModel)]="selEvaluador">
+                              <option [ngValue]=null>Seleccione ...</option>
+                              <option  *ngFor="let item of listEvaluador" [ngValue]="item">{{item.Nombre}}</option>       
+                              
+                              </select>
+                            <!-- <input class="form-control form-control-sm" type="text" formControlName="Nombre"> -->
+                            </div>     
+                    </div>
+                    <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                      <div class="form-group">
+                        <label></label>                               
+                        <i class="fas fa-plus" title="Agregar evaluador" (click)="onClickAgregarEvaluador()" style="margin-top:1.9rem;cursor: pointer;font-size: 2rem;color:blue"></i>
+                      </div>     
+                           
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <table id="dataEvaluador" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                      style="width:100%">
+
+                        </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer text-muted text-right" style="margin-top:1rem;">
+                  <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+                  <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                </div>
+              </ng-template>
+            </li>
             
           </ul>
          

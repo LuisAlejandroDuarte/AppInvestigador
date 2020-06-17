@@ -14,6 +14,17 @@
         echo json_encode($result);      
     }
 
+    
+    if ($Accion=='allbyinve')
+    {
+      $SQL ="SELECT * from sgi_semi WHERE SEM_INV_CODI =" . $_GET["id"] ;
+      $execute = new  DataBase();
+        $result= $execute->executeArraySql($SQL);        
+        echo json_encode($result);      
+    }
+
+    
+
     if ($Accion=='select')
     {
       $SQL ="SELECT * from sgi_semi WHERE SEM_CODI =" . $_GET["id"] ;

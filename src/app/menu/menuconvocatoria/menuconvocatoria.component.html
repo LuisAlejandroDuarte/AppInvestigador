@@ -16,27 +16,33 @@
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                   <div class="card" style="width: 18rem;">
                       <div class="card-body">
-                        <h5 class="card-title">Registro propuestas</h5>     
-                        <img src="/assets/img/propuesta.png">                           
+                        <h5 class="card-title">Registro propuestas</h5>  
+                        <a [routerLink]="['/convocatoria/propuesta']">
+                          <img src="/assets/img/propuesta.png">                           
+                        </a>         
+                        
                       </div>
                     </div>
               </div>
               <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
                   <div class="card" style="width: 18rem;">
                       <div class="card-body">
-                        <h5 class="card-title">Evaluación propuestas</h5>
-                        <img src="/assets/img/evaluacion.png">      
-                        <!-- <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a> -->
+                        <h5 class="card-title">Evaluación propuestas</h5>                        
+                        <a [routerLink]="['/convocatoria/evaluar']">
+                          <img src="/assets/img/evaluacion.png">      
+                        </a>                                                        
                       </div>
                     </div>
               </div>
           </div>  
-          <div class="card-footer text-muted text-right">            
-            <button type="button" class="btn btn-outline-danger btn-sm"  (click)="goBack()">Salir</button>                        
-          </div>                     
+          <div class="row no-gutters">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-4 col-12">
+              <div class="card-footer text-muted text-right">            
+                <button type="button" class="btn btn-outline-danger btn-sm"  (click)="goBack()">Salir</button>                        
+              </div>                     
+            </div>
+          </div>
+
       </div>       
     </div>    
 </div>

@@ -302,7 +302,97 @@ export class LoginComponent implements OnInit {
                   $('#IdError').show();  
                 });
         }  
+        if (this.route.snapshot.params.id==6)
+        {
+          this.investigadorService.getValidar(usuario).subscribe(result=>{
+            
+            if (result==null)
+            {
+              let mensaje =new Mensaje();
+              mensaje.tipo=TipoMensaje.Advertencia;
+              this.mensaje = new Mensaje(mensaje);
+              this.mensaje.tipo=TipoMensaje.Error;
+              this.mensaje.titulo="Validando grupo";
+              this.mensaje.cuerpo="El usuario o la contraseña no corresponden";
+              this.mensaje.nVentana="IdError";         
+              this.alerta.onChangedMyId("IdError");
+              $('#iconoEspera').hide();
+              setTimeout(()=>{
+                  $('#IdError').show();     
+                });
+            }
+            else
+            {
+              $('#iconoEspera').hide();
+              let user= new logueado();
+              user.use_cod_tipo=result.use_cod_tipo;
+              user.use_codi=result.use_codi;   
+              user.inv_codi=result.inv_codi;                                           
+              user.modulos=Array<Modulo>(5);                  
+                user.modulos[0]=2;
+                user.modulos[1]=3;
+                user.modulos[2]=4;
+                user.modulos[3]=6;
+                user.modulos[4]=7;
+                localStorage.setItem("user",JSON.stringify(user));
+                this.router.navigate(['/convocatoria/propuesta']);  
+            }
+          },error=> {
+            $('#iconoEspera').hide();
+            console.clear();
+            var errorComponent = new ErrorComponent();            
+            this.mensaje =errorComponent.GenerarMensaje(error);          
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();  
+          });
+        }  
 
+        if (this.route.snapshot.params.id==7)
+        {
+          this.investigadorService.getValidar(usuario).subscribe(result=>{
+            
+            if (result==null)
+            {
+              let mensaje =new Mensaje();
+              mensaje.tipo=TipoMensaje.Advertencia;
+              this.mensaje = new Mensaje(mensaje);
+              this.mensaje.tipo=TipoMensaje.Error;
+              this.mensaje.titulo="Validando evaluación";
+              this.mensaje.cuerpo="El usuario o la contraseña no corresponden";
+              this.mensaje.nVentana="IdError";         
+              this.alerta.onChangedMyId("IdError");
+              $('#iconoEspera').hide();
+              setTimeout(()=>{
+                  $('#IdError').show();     
+                });
+            }
+            else
+            {
+              $('#iconoEspera').hide();
+              let user= new logueado();
+              user.use_cod_tipo=result.use_cod_tipo;
+              user.use_codi=result.use_codi;   
+              user.inv_codi=result.inv_codi;                                           
+              user.modulos=Array<Modulo>(5);                  
+                user.modulos[0]=2;
+                user.modulos[1]=3;
+                user.modulos[2]=4;
+                user.modulos[3]=6;
+                user.modulos[4]=7;
+                localStorage.setItem("user",JSON.stringify(user));
+                this.router.navigate(['/convocatoria/evaluar']);  
+            }
+          },error=> {
+            $('#iconoEspera').hide();
+            console.clear();
+            var errorComponent = new ErrorComponent();            
+            this.mensaje =errorComponent.GenerarMensaje(error);          
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();  
+          });
+        }  
    
     }
     else
@@ -344,6 +434,16 @@ export class LoginComponent implements OnInit {
     if (this.route.snapshot.params.id==5)
     {
       this.headText="Convocatoria gestión";
+    }  
+
+    if (this.route.snapshot.params.id==6)
+    {
+      this.headText="Propuesta";
+    }  
+
+    if (this.route.snapshot.params.id==7)
+    {
+      this.headText="Evaluación propuestas";
     }  
   }
 

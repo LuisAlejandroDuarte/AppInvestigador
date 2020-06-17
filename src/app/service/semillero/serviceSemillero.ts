@@ -22,6 +22,11 @@ export class SemilleroService {
       return this.http.get<Semillero[]>(this.baseUrl + 'semillero/prSelect.php/?accion=all');
     }  
 
+    getByInve (id:number):Observable<Semillero[]>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.get<Semillero[]>(this.baseUrl + 'semillero/prSelect.php/?accion=allbyinve&id=' + id);
+    }  
+
 
     insert (semillero:Semillero):Observable<any>{
       const headers = new HttpHeaders().set('content-type', 'application/json');  

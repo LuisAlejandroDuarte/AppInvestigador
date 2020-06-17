@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Convocatoria } from 'src/app/entidad/convocatoria/entidad.convocatoria';
+import { Juez } from 'src/app/entidad/juez/entidad.juez';
 
 
 const httpOptions = {
@@ -18,6 +19,11 @@ export class ConvocatoriaService {
     getALL ():Observable<Convocatoria[]>{
       const headers = new HttpHeaders().set('content-type', 'application/json');  
       return this.http.get<Convocatoria[]>(this.baseUrl + 'convocatoria/prSelect.php/?accion=ALL');
+    }  
+
+    getEvaluadores(idConvocatoria:number,idPropuesta:number):Observable<any[]>{
+      const headers = new HttpHeaders().set('content-type', 'application/json');  
+      return this.http.get<any[]>(this.baseUrl + 'convocatoria/prSelect.php/?accion=ConvocatoriaByJuez&id=' + idConvocatoria + '&idPropuesta=' + idPropuesta);
     }  
 
 

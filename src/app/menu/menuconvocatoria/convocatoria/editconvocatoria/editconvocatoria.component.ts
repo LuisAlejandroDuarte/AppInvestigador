@@ -13,6 +13,14 @@ import { ConvocatoriaParametro } from 'src/app/entidad/convocatoriaparametro/ent
 import { ConvocatoriaParametroService } from 'src/app/service/convocatoriaparametro/service.convocatoriaparametro';
 import { Parametro } from 'src/app/entidad/parametro/entidad.parametro';
 import { ParametroService } from 'src/app/service/parametro/service.parametro';
+import { Propuesta, PropuestaInvestigador } from 'src/app/entidad/propuesta/entidad.propuesta';
+import { PropouestaService } from 'src/app/service/propuesta/service.propuesta';
+import { lenguajeSpanish } from 'src/app/complement/languajeDatatable';
+import { Evaluador, Investigador } from 'src/app/entidad/investigador/entidad.investigador';
+import { InvestigadorService } from 'src/app/service/investigador/serviceInvestigador';
+import { Juez } from 'src/app/entidad/juez/entidad.juez';
+import { JuezService } from 'src/app/service/juez/serviceJuez';
+import { ThrowStmt } from '@angular/compiler';
 declare const $: any;
 
 @Injectable()
@@ -91,13 +99,30 @@ export class EditConvocatoriaComponent implements OnInit {
   selConvocatoriaParametro:ConvocatoriaParametro=null;
   valorParametro:number=null;
 
+
+  //ASIGNAR EVALUADORES
+  listPropuesta:Propuesta[]=[];
+  selPropuesta:Propuesta=null;
+  table:any;
+  selEvaluador:Evaluador=null;
+  listEvaluador:Evaluador[]=[];
+  listTablaEvaluador:Evaluador[]=[];
+  columnIndex:number;
+  listPropuestaInvestigador:PropuestaInvestigador[]=[];
+  listJuez:Juez[]=[];
+
+  selJuez:Juez=null;
+
   constructor(private router:Router,
     private dateAdapter: CustomDateParserFormatter, 
     private serviceTipoConvocatoria:TipoConvocatoriaService,
     private servicecConvocatoria:ConvocatoriaService,
     private route:ActivatedRoute,
     private serviceConvocatoriaParametro:ConvocatoriaParametroService,
-    private serviceConvocatoria:ParametroService) { }
+    private serviceConvocatoria:ConvocatoriaService,private servicePropuesta:PropouestaService,
+    private serviceEvaluador:InvestigadorService,
+    private serviceParametro:ParametroService,
+    private serviceJuez:JuezService) { }
 
 
   valuechange(event:KeyboardEvent)
@@ -204,11 +229,56 @@ export class EditConvocatoriaComponent implements OnInit {
           $('#IdError').show();
         });
     }
-
+    if (event.nVentana=="IdEliminarJuez")
+    {
+      $('#iconoEspera').show();
+      this.serviceJuez.delete(this.selJuez).subscribe(res=>{
+        this.serviceConvocatoria.getEvaluadores(this.convocatoria.CON_CODI,this.selPropuesta.PRO_CODI).subscribe(res2=>{
+          let index =this.listTablaEvaluador.findIndex(x=>x.PCJU_CODI==this.selJuez.PCJU_CODI);
+          this.listTablaEvaluador.splice(index,1);
+          this.table = $('#dataEvaluador').DataTable();
+          this.table.clear();
+          this.table.rows.add([]);
+          this.table.draw();    
+          if (res2!=null)
+          {
+            this.table.rows.add(res2);
+            this.table.draw();       
+          }
+          $('#iconoEspera').hide();
+          $('#IdEliminarJuez').hide();
+          
+        },error=> {
+          $('#iconoEspera').hide();
+          $('#IdEliminarJuez').hide();
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+        });
+      },error=> {
+        $('#iconoEspera').hide();
+        $('#IdEliminarJuez').hide();
+        console.clear();
+        var errorComponent = new ErrorComponent();            
+        this.mensaje =errorComponent.GenerarMensaje(error);          
+        this.mensaje.nVentana="IdError";
+        this.alerta.onChangedMyId("IdError");                      
+        $('#IdError').show();
+      });
+    }
   }
 
   onClicBoton2(event:any)
   {
+    if (event.nVentana=="IdEliminar")
+    $('#IdEliminar').hide();
+    
+    if (event.nVentana=="IdEliminarJuez")
+    $('#IdEliminarJuez').hide();
+
     if (event.nVentana=="IdEliminarParametro")
     $('#IdEliminarParametro').hide();
 
@@ -216,12 +286,251 @@ export class EditConvocatoriaComponent implements OnInit {
     $('#IdError').hide();
   }
 
+  iniciarTablaInvestigador() {
+    this.table = $('#dataInvestigador').DataTable({
+      dom: '<"top">rt<"bottom"><"clear">',    
+      order: [],   
+      columns: [
+        { title: 'Investigador', data: 'Investigador' },        
+        { title: 'Rol', data: 'Rol'},
+        { title: 'Grupo', data: 'Grupo'},
+        { title: 'Escuela', data: 'Escuela'},
+        { title: 'Programa', data: 'Programa'}      
+              
+      ],
+      
+      responsive: true,
+      scrollY: '100',
+      language:lenguajeSpanish
+      
+    });
+        
+  }
+
+  iniciarTablaEvaluador() {
+    this.table = $('#dataEvaluador').DataTable({
+      dom: '<"top">rt<"bottom"><"clear">',    
+      order: [],   
+      columns: [
+        { title: 'Investigador', data: 'Nombre' },        
+        { title: 'Cargo', data: 'Cargo'},        
+        { title: 'Escuela', data: 'Escuela'},
+        { title: 'Programa', data: 'Programa'}      
+              
+      ],
+      columnDefs: [
+        {
+          targets: [4],
+          data: null,                   
+          className: "text-left",          
+
+          render: (data:any, type:any, full:Evaluador, meta:any) => {
+            
+            return  '<i title="Eliminar evaluador" style="color:red;cursor:pointer;font-size:1.2rem" class="fas fa-trash-alt" aria-hidden="true" data-element-id=' + full.INV_CODI + ' data-element-idjuez=' + full.PCJU_CODI + '></i>'                                
+          }
+        }],
+      responsive: true,
+      scrollY: '100',
+      language:lenguajeSpanish
+      
+    });
+    $('#dataEvaluador tbody').on('click', 'td', event => {
+      this.columnIndex=event.currentTarget.cellIndex;
+      });
+  
+      $('#dataEvaluador tbody').on('click', 'tr', event => {
+       
+  
+        if (this.columnIndex==4)
+        {
+          let id:number=event.currentTarget.cells[4].children[0].dataset.elementId;
+          let idJuez:number=event.currentTarget.cells[4].children[0].dataset.elementIdjuez;
+          this.selJuez = new Juez();
+          this.selJuez.PCJU_CODI=idJuez;
+          if ( this.listEvaluador.find(x=>x.INV_CODI==id).seleccionado==true)
+          {
+            let index=this.listTablaEvaluador.findIndex(x=>x.INV_CODI==id);
+            this.listTablaEvaluador.splice(index,1);
+            this.table = $('#dataEvaluador').DataTable();
+            this.table.clear();
+            this.table.rows.add([]);
+            this.table.draw();    
+            if (this.listTablaEvaluador!=null)
+            {
+              this.table.rows.add(this.listTablaEvaluador);
+              this.table.draw();       
+            }
+          }
+          else
+          {
+          let mensaje = new Mensaje();
+          mensaje.tipo=TipoMensaje.CondicionSINO;       
+          this.mensaje = new Mensaje(mensaje);     
+          this.mensaje.titulo="Eliminar investigador"
+          this.mensaje.cuerpo="Desea eliminar el investigador " + this.listEvaluador.find(x=>x.INV_CODI==id).Nombre  + " ?";                                     
+          this.mensaje.nVentana="IdEliminarJuez";
+          this.alerta.onChangedMyId("IdEliminarJuez");                      
+          $('#IdEliminarJuez').show(); 
+          }
+        }
+      });
+        
+  }
+
+  onClickAgregarEvaluador()
+  {
+    
+    if (this.selPropuesta==null)
+    {
+      let mensaje = new Mensaje();
+      mensaje.tipo=TipoMensaje.Error;       
+      this.mensaje = new Mensaje(mensaje);     
+      this.mensaje.titulo="Convocatoria"
+      this.mensaje.cuerpo="Seleccione una propuesta";                                     
+      this.mensaje.nVentana="IdError";
+      this.alerta.onChangedMyId("IdError");                      
+      $('#IdError').show();   
+      return false;   
+    }
+
+    if (this.selEvaluador==null)
+    {
+      let mensaje = new Mensaje();
+      mensaje.tipo=TipoMensaje.Error;       
+      this.mensaje = new Mensaje(mensaje);     
+      this.mensaje.titulo="Convocatoria"
+      this.mensaje.cuerpo="Seleccione un evaluador";                                     
+      this.mensaje.nVentana="IdError";
+      this.alerta.onChangedMyId("IdError");                      
+      $('#IdError').show();   
+      return false;   
+    }
+
+    if (this.listTablaEvaluador.find(x=>x.INV_CODI==this.selEvaluador.INV_CODI)!=undefined)
+    {
+      let mensaje = new Mensaje();
+      mensaje.tipo=TipoMensaje.Error;       
+      this.mensaje = new Mensaje(mensaje);     
+      this.mensaje.titulo="Convocatoria"
+      this.mensaje.cuerpo="Ya se encuentra el evaluador seleccioando";                                     
+      this.mensaje.nVentana="IdError";
+      this.alerta.onChangedMyId("IdError");                      
+      $('#IdError').show();   
+      return false;  
+    }
+
+    if (this.listPropuestaInvestigador.find(x=>x.PIN_INVE_CODI==this.selEvaluador.INV_CODI)!=undefined)
+    {
+      let mensaje = new Mensaje();
+      mensaje.tipo=TipoMensaje.Error;       
+      this.mensaje = new Mensaje(mensaje);     
+      this.mensaje.titulo="Convocatoria"
+      this.mensaje.cuerpo="Es integrante de la propuesta";                                     
+      this.mensaje.nVentana="IdError";
+      this.alerta.onChangedMyId("IdError");                      
+      $('#IdError').show();   
+      return false;  
+    }
+
+
+    this.selEvaluador.seleccionado=true;
+    this.listTablaEvaluador.splice(0,0,this.selEvaluador);
+
+      this.table = $('#dataEvaluador').DataTable();
+      this.table.clear();
+      this.table.rows.add([]);
+      this.table.draw();    
+      if (this.listTablaEvaluador!=null)
+      {
+        this.table.rows.add(this.listTablaEvaluador);
+        this.table.draw();       
+      }
+      
+
+
+  }
+
+  onChangePropuesta()
+  {
+    this.listTablaEvaluador=[];
+    this.table = $('#dataInvestigador').DataTable();
+    this.table.clear();
+    this.table.rows.add([]);
+    this.table.draw();    
+    if (this.selPropuesta==null) return;
+    $('#iconoEspera').show();
+    this.servicePropuesta.getInvestigadorByPropuesta(this.selPropuesta.PRO_CODI).subscribe(res=>{
+      this.listPropuestaInvestigador=res;
+      this.table = $('#dataInvestigador').DataTable();
+      this.table.clear();
+      this.table.rows.add([]);
+      this.table.draw();    
+      if (res!=null)
+      {
+        this.table.rows.add(res);
+        this.table.draw();       
+      }
+      this.serviceConvocatoria.getEvaluadores(this.convocatoria.CON_CODI,this.selPropuesta.PRO_CODI).subscribe(res2=>{
+        this.listTablaEvaluador=[];        
+        let evaluador:Evaluador;
+        if (res2!=null)
+        {
+          res2.forEach(element => {
+              evaluador= new Evaluador();              
+              evaluador.Cargo=element.Cargo;
+              evaluador.ESC_CODI=element.ESC_CODI;
+              evaluador.Escuela=element.Escuela;
+              evaluador.INV_CODI =element.INV_CODI;
+              evaluador.Nombre=element.Nombre;              
+              evaluador.PCJU_CODI=element.PCJU_CODI;    
+              evaluador.Programa=element.Programa;
+              evaluador.TICA_CODI=element.TICA_CODI;        
+              evaluador.seleccionado=false;                 
+              this.listTablaEvaluador.splice(0,0,evaluador);           
+          });
+        }
+
+        
+        this.table = $('#dataEvaluador').DataTable();
+        this.table.clear();
+        this.table.rows.add([]);
+        this.table.draw();    
+        if (res2!=null)
+        {
+          this.table.rows.add(res2);
+          this.table.draw();       
+        }
+        $('#iconoEspera').hide();
+        
+      },error=> {
+        $('#iconoEspera').hide();
+        console.clear();
+        var errorComponent = new ErrorComponent();            
+        this.mensaje =errorComponent.GenerarMensaje(error);          
+        this.mensaje.nVentana="IdError";
+        this.alerta.onChangedMyId("IdError");                      
+        $('#IdError').show();
+      });
+
+     
+    },error=> {
+      $('#iconoEspera').hide();
+      console.clear();
+      var errorComponent = new ErrorComponent();            
+      this.mensaje =errorComponent.GenerarMensaje(error);          
+      this.mensaje.nVentana="IdError";
+      this.alerta.onChangedMyId("IdError");                      
+      $('#IdError').show();
+    });
+  }
+
+
   onChangeNavs(changeEvent: NgbNavChangeEvent)
   {
     switch (changeEvent.nextId) {
       case 2:      
       $('#iconoEspera').show();
-      this.serviceConvocatoria.getALL().subscribe(res=>{
+      this.serviceParametro.getALL().subscribe(res=>{
         this.listParametro=res;
         this.selParametro=null;
         this.serviceConvocatoriaParametro.getALL(this.convocatoria.CON_CODI).subscribe(res2=>{
@@ -239,6 +548,39 @@ export class EditConvocatoriaComponent implements OnInit {
         $('#IdError').show();
       });
         break;
+      case 3:
+        $('#iconoEspera').show();
+        this.servicePropuesta.getByconvocatoria(this.convocatoria.CON_CODI).subscribe(res=>{
+          this.listPropuesta=res;
+          this.selPropuesta=null;
+          this.iniciarTablaInvestigador();
+        
+          let inve= new Investigador();
+          inve.accion="Evaluador";
+          this.serviceEvaluador.getEvaluador(inve).subscribe(res=>{
+            this.listEvaluador=res;
+            this.selEvaluador=null;
+            this.iniciarTablaEvaluador();
+            $('#iconoEspera').hide();
+          },error=> {
+            $('#iconoEspera').hide();
+            console.clear();
+            var errorComponent = new ErrorComponent();            
+            this.mensaje =errorComponent.GenerarMensaje(error);          
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();
+          })
+        },error=> {
+          $('#iconoEspera').hide();
+          console.clear();
+          var errorComponent = new ErrorComponent();            
+          this.mensaje =errorComponent.GenerarMensaje(error);          
+          this.mensaje.nVentana="IdError";
+          this.alerta.onChangedMyId("IdError");                      
+          $('#IdError').show();
+        });
+
       default:
         break;
     }
@@ -580,6 +922,58 @@ export class EditConvocatoriaComponent implements OnInit {
           this.mensaje.nVentana="IdError";
           this.alerta.onChangedMyId("IdError");                      
           $('#IdError').show();
+        });
+        break;
+      case 3:
+
+        if (this.selPropuesta==null)
+          {
+            let mensaje = new Mensaje();
+            mensaje.tipo=TipoMensaje.Error;       
+            this.mensaje = new Mensaje(mensaje);     
+            this.mensaje.titulo="Convocatoria"
+            this.mensaje.cuerpo="Seleccione propuesta";                                     
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();   
+            return false;   
+          }
+
+        $('#iconoEspera').show();        
+        let juez : Juez;
+        this.listJuez=[];
+        this.listTablaEvaluador.forEach(element=> {
+          juez = new Juez();
+          juez.PCJU_CON_CODI=this.convocatoria.CON_CODI;
+          juez.PCJU_INV_CODI=element.INV_CODI;
+          juez.PCJU_PCAT_CODI=this.selPropuesta.PRO_CODI;          
+          juez.seleccionado=element.seleccionado;
+          this.listJuez.splice(0,0,juez);
+        });
+        this.serviceJuez.insert(this.listJuez).subscribe(res=>{
+          this.listTablaEvaluador.forEach(x=>x.seleccionado=false);
+          this.serviceConvocatoria.getEvaluadores(this.convocatoria.CON_CODI,this.selPropuesta.PRO_CODI).subscribe(res2=>{
+            this.table = $('#dataEvaluador').DataTable();
+            this.table.clear();
+            this.table.rows.add([]);
+            this.table.draw();    
+            if (res2!=null)
+            {
+              this.table.rows.add(res2);
+              this.table.draw();       
+            }
+            $('#iconoEspera').hide();
+            
+          },error=> {
+            $('#iconoEspera').hide();
+            console.clear();
+            var errorComponent = new ErrorComponent();            
+            this.mensaje =errorComponent.GenerarMensaje(error);          
+            this.mensaje.nVentana="IdError";
+            this.alerta.onChangedMyId("IdError");                      
+            $('#IdError').show();
+          });
+
         });
       }
   }

@@ -52,6 +52,19 @@ export class AuthGuard implements CanActivate {
         return false;
       }
 
+      if (state.url=="/convocatoria/propuesta" && user.use_cod_tipo==0){
+        localStorage.removeItem("user");
+        this.router.navigate(['/login',6]);        
+        return false;
+      }
+
+      if (state.url=="/convocatoria/evaluar" && user.use_cod_tipo==0){
+        localStorage.removeItem("user");
+        this.router.navigate(['/login',7]);        
+        return false;
+      }
+
+
       return true;
       
     }
@@ -73,6 +86,14 @@ export class AuthGuard implements CanActivate {
 
       if (state.url=="/convocatoria/gestion"){
         this.router.navigate(['/login',5]);        
+      }  
+
+      if (state.url=="/convocatoria/propuesta"){
+        this.router.navigate(['/login',6]);        
+      }  
+
+      if (state.url=="/convocatoria/evaluar"){
+        this.router.navigate(['/login',7]);        
       }  
       return false;
     }

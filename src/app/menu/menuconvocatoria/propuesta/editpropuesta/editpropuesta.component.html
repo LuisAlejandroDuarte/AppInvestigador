@@ -1,0 +1,179 @@
+<app-alerta [dataAlerta]="mensaje" (boton1)="onClicBoton1($event)"  (boton2)="onClicBoton2($event)"></app-alerta>
+
+
+
+<div class="container">
+    <div class="detalle2" style="width: 100%;margin-left: 0%;margin-top:5rem">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" (navChange)="onChangeNavs($event)">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>Información General Convocatoria </a>
+              <ng-template ngbNavContent>
+        
+
+                  <div class="list-group" style="overflow-y: auto;height:20rem ;margin-left: 1rem;">
+                    <div class="list-group-item list-group-item-action flex-column align-items-start"  *ngFor="let item  of listConvocatoria">
+                      <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{item.CON_NUME}}</h5>
+                       
+                      </div>
+                      <p class="mb-1"><small>{{item.CON_DESC}}</small>
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                <p class="mb-1"><label>Fecha inicio</label><br>
+                                    <small>{{item.fechaInicioString}}</small>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                <p class="mb-1"><label>Fecha termina</label><br>
+                                    <small>{{item.fechaFinString}}</small>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                <p class="mb-1"><label>Tipo convocatoria</label><br>
+                                    <small>{{item.nombreTipoConvocatoria}}</small>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+                                <p class="mb-1"><label>Puntaje</label><br>
+                                    <small>{{item.CON_PUNT_TOTA}}</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                              <p class="mb-1"><label>Texto</label><br>
+                                <a [href]="item.CON_TEXT"  target="_blank">{{item.CON_TEXT}}</a>
+                          </div>
+                          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                            <p class="mb-1"><label>Resolución</label><br>
+                                <a [href]="item.CON_RESO"  target="_blank">{{item.CON_RESO}}</a>
+                        </div>
+                        </div>
+                    </div>
+                    
+                  </div>
+                  <div class="card-footer text-muted text-right" style="margin-top:1rem">                    
+                    <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                  </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2" [disabled]="disabled">
+              <a ngbNavLink>{{nameTab}}</a>
+              <ng-template ngbNavContent>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Investigador</label>
+                        <select  class="form-control form-control-sm" id="IdSelInvestigador" [(ngModel)]="selInvestigador" (change)="onChangeInvestigador()">
+                          <option [ngValue]=null>Seleccione ...</option>
+                          <option  *ngFor="let item of listInvestigador" [ngValue]="item">{{item.INV_NOMB}} {{item.INV_APEL}}</option>       
+                          
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Rol</label>
+                        <select  class="form-control form-control-sm" id="IdRol" [(ngModel)]="selTipoVinculacion">
+                          <option [ngValue]=null>Seleccione ...</option>
+                          <option  *ngFor="let item of listTipoVinculacion" [ngValue]="item">{{item.TIV_DESC}}</option>       
+                          
+                          </select>
+                      </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Grupo investigacion</label>
+                        <select  class="form-control form-control-sm" id="IdGrupo" [(ngModel)]="selGrupo">
+                          <option [ngValue]=null>Seleccione ...</option>
+                          <option  *ngFor="let item of listGrupo" [ngValue]="item">{{item.gru_nomb}}</option>       
+                          
+                          </select>
+                      </div>
+                    </div>
+                  </div>       
+                  <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                        <p class="mb-1"><label>Programa</label><br>
+                          <small>{{programa}}</small>
+                    </div>
+                    <div class="col-xl-5 col-lg-5 col-md-10 col-sm-10 col-10">
+                      <p class="mb-1"><label>Escuela</label><br>
+                          <small>{{escuela}}</small>
+                  </div>
+                  <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-2">
+                    <div class="form-group">
+                      <label></label>                               
+                      <i class="fas fa-plus" title="Agregar investigdor" (click)="onClickAgregarInvestigador()"
+                       style="margin-top:1.9rem;cursor: pointer;font-size: 2rem;color:blue"></i>
+                    </div>   
+                  </div>
+                  </div> 
+                  <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                      <table id="dataInvestigador" class="table table-striped table-no-bordered table-hover" cellspacing="0" 
+                      style="width:100%">
+
+                        </table>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Título propuesta de investigación</label>                        
+                        <input class="form-control form-control-sm" name="titulo" [(ngModel)]="tituloPropuesta"/>    
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                      <div class="form-group">
+                        <label>Convocatoria</label>
+                        <select  class="form-control form-control-sm" id="IdSelConvocatoria" [(ngModel)]="selConvocatoria">
+                          <option [ngValue]=null>Seleccione ...</option>
+                          <option  *ngFor="let item of listConvocatoria" [ngValue]="item">{{item.CON_DESC}}</option>       
+                          
+                          </select>
+                      </div>
+                    </div>
+                  </div>                                                   
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+                      
+                        <label>Documento del proyecto</label><button  type="button" class="btn btn-link btn-sm" (click)="textoFileInput.click()" title="Seleccione un archivo"> <i style="color:green" class="fas fa-cloud-upload-alt"></i></button><br>                       
+                        <a [href]="documentoArchivoSeleccionado" style="font-size: 0.7rem;" target="_blank">{{documentoArchivoSeleccionado}}</a>
+                      
+                       <div class="icons-controls">
+                        <input   style="display: none"  type="file" (change)="onDocumentoFileChanged($event)" #textoFileInput>                                                                                
+                      </div>
+                     
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">                      
+                        <label>Carta aval</label><button  type="button" class="btn btn-link btn-sm" (click)="resolucionFileInput.click()" title="Seleccione un archivo"> <i style="color:green" class="fas fa-cloud-upload-alt"></i></button><br>             
+                        <a [href]="cartaArchivoSeleccionado" style="font-size: 0.7rem;"  target="_blank">{{cartaArchivoSeleccionado}}</a>                                                      
+                       <div class="icons-controls">
+                        <input   style="display: none"  type="file" (change)="onCartaFileChanged($event)" #resolucionFileInput>   
+                                                                                
+                      </div>                                 
+                    </div>
+                  </div>
+                 
+                  <div class="card-footer text-muted text-right">
+                    <button type="button" class="btn btn-outline-primary btn-sm mr-1" (click)="onGuardar()">Guardar</button>
+                    <button type="button" class="btn btn-outline-danger btn-sm"  (click)="onSalir()">Salir</button>                        
+                  </div>                    
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3" [disabled]="disabled">
+              <a ngbNavLink>Evaluación propuesta</a>
+              <ng-template ngbNavContent>
+                <div class="container">
+
+                </div>
+              </ng-template>
+            </li>
+            
+          </ul>
+         
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+         
+    </div>
+   
+</div>
+
